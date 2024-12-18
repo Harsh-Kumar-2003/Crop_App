@@ -9,7 +9,8 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 let page = true;
 
-const Sidebar = () => {
+const Sidebar = ({ params }) => {
+  const user = params.user;
   return (
     <main className="md:flex min-h-screen bg-white">
       <label
@@ -40,7 +41,7 @@ const Sidebar = () => {
             />
           </div>
           <div className="mb-4">
-            {page && (
+            {
               <Link
                 href={"/"}
                 className="text-center mt-4 flex gap-1 items-center justify-center 
@@ -52,8 +53,8 @@ const Sidebar = () => {
               >
                 <span className="text-xl text-black">Home</span>
               </Link>
-            )}
-            {page && (
+            }
+            {
               <Link
                 href={"/admin"}
                 className="text-center mt-4 flex gap-1 items-center justify-center 
@@ -65,11 +66,11 @@ const Sidebar = () => {
               >
                 <span className="text-xl text-black">Administrator</span>
               </Link>
-            )}
+            }
           </div>
           <Divider className="" />
           <div className="text-center">
-            <AppSidebar />
+            <AppSidebar params={params} />
           </div>
         </div>
       </aside>

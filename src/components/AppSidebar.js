@@ -1,10 +1,11 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import React from "react";
-import Divider from "./Divider";
+import { useRouter } from "next/router";
 
-export default function AppSidebar() {
+export default function AppSidebar({ params }) {
   const path = usePathname();
+  const user = params.user;
 
   return (
     <nav
@@ -12,12 +13,12 @@ export default function AppSidebar() {
 text-black"
     >
       <Link
-        href={"/admin/user"}
-        className={
-          "flex gap-4 p-2 " + (path === "/admin/user" ? "text-blue-500" : "")
-        }
+        href={`/user/${user}/profile`} // Use the dynamic uri in the href
+        className={`flex gap-4 p-2 ${
+          path === `/user/${user}/profile` ? "text-blue-500" : ""
+        }`} // Check if the current path matches
       >
-        <span>User Management</span>
+        <span>Profile</span>
       </Link>
 
       <Link
