@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
-
-input#navCb:checked ~ aside {
-  left: 0;
-}
-
-input#navCb:checked ~ .backdrop {
-  display: block;
-}
-
 html {
   scroll-behavior: smooth;
 }
