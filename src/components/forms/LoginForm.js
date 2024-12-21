@@ -24,7 +24,7 @@ export default function LoginForm() {
     const { email, password } = formData;
     // Proceed with form submission
     try {
-      const result = await signIn("credentials", {
+      await signIn("credentials", {
         email,
         password,
         mode: "login",

@@ -5,3 +5,10 @@
 html {
   scroll-behavior: smooth;
 }
+
+input#navCb:checked ~ aside {
+  left: 0;
+}
+input#navCb:checked ~ .backdrop {
+  display: block;
+}

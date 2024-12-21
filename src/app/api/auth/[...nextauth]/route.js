@@ -3,7 +3,7 @@ import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import clientPromise from "@/libs/mongodb"; // MongoDB connection
 import User from "@/models/User";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import mongoose from "mongoose";
 
 export const authOptions = {
@@ -121,8 +121,8 @@ export const authOptions = {
       console.log("Base URL:", baseUrl);
 
       // Redirect to a dynamic user-specific route after login
-      if (url === `${baseUrl}/user/login`) {
-        return `${baseUrl}/user/${token.email}`;
+      if (url === `${baseUrl}/user/login` || url === `${baseUrl}/user/signup`) {
+        return `${baseUrl}/user/`;
       }
 
       // Allow other valid redirections
