@@ -6,39 +6,27 @@ import AppSidebar from "./AppSidebar";
 import Divider from "./Divider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import LogoutButton from "./LogOutButton";
-// import { useSession } from "next-auth/react";
-// import LogoutButton from "./LogOutButton";
+
+let page = true;
 
 const Sidebar = ({ params }) => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
-
-  const toggleNav = () => {
-    setIsNavOpen(!isNavOpen);
-  };
-
+  const user = params.user;
   return (
-    <div className="md:flex min-h-screen bg-white">
-      <button
-        onClick={toggleNav}
+    <main className="md:flex min-h-screen bg-white">
+      <label
+        htmlFor="navCb"
         className="md:hidden ml-8 mt-4 p-4 mr-8 rounded-md bg-blue-500 shadow inline-flex items-center gap-2 cursor-pointer"
       >
-        <FontAwesomeIcon icon={faBars} />
-      </button>
-
-      {/* Overlay */}
-      {isNavOpen && (
-        <div
-          className="backdrop fixed inset-0 bg-black/80 z-10"
-          onClick={toggleNav} // Close navigation when overlay is clicked
-        ></div>
-      )}
-      <aside
-        className={`bg-white w-48 p-4 pt-6 shadow fixed md:static top-0 bottom-0 z-20 transition-all duration-300 ease-in-out ${
-          isNavOpen ? "left-0" : "-left-48"
-        }`}
-      >
+        <span className="">
+          <FontAwesomeIcon icon={faBars} />
+        </span>
+      </label>
+      <input id="navCb" type="checkbox" className="hidden" />
+      <label
+        htmlFor="navCb"
+        className="hidden backdrop fixed inset-0 bg-black/80 z-10"
+      ></label>
+      <aside className="bg-white w-48 p-4 pt-6 shadow fixed md:static -left-48 top-0 bottom-0 z-20 transition-all">
         <div className="sticky top-0 pt-2">
           <div
             className="rounded-full overflow-hidden aspect-square w-8 mx-auto
@@ -84,17 +72,10 @@ const Sidebar = ({ params }) => {
           <div className="text-center">
             <AppSidebar params={params} />
           </div>
-          <Divider />
-          {/* {status === "authenticated" && ( // Render LogoutButton only if authenticated
-            <div className="text-center mt-4">
-              <LogoutButton />
-            </div>
-          )} */}
-          <LogoutButton />
         </div>
       </aside>
       {/* <div className="grow">{children}</div> */}
-    </div>
+    </main>
   );
 };
 
