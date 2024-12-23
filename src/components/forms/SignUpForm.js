@@ -1,15 +1,32 @@
+// signup form
 "use client";
 
 import { useState } from "react";
-import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid"; // Make sure to install Heroicons
+import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
+import { signIn } from "next-auth/react";
 
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const { firstName, lastName, email, password } = formData;
+
     if (password.length < 8) {
       alert("Password must be at least 8 characters long.");
       return;
@@ -19,6 +36,25 @@ const SignUpForm = () => {
       return;
     }
     // Proceed with form submission
+    try {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        name: `${firstName} ${lastName}`,
+        mode: "signup", // Specify mode for signup
+        redirect: false,
+      });
+
+      if (result.error) {
+        alert(result.error); // Display error message
+      } else {
+        alert("Signup successful! Redirecting...");
+        // const encryptedEmail = atob(result.email);
+        // Redirect to home or dashboard
+      }
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -33,7 +69,9 @@ const SignUpForm = () => {
         <input
           type="text"
           id="FirstName"
-          name="first_name"
+          name="firstName" // Update name to match formData
+          value={formData.firstName} // Bind value to formData
+          onChange={handleChange} // Use handleChange
           className="mt-1 w-full rounded-md border-gray-300 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
         />
       </div>
@@ -48,7 +86,9 @@ const SignUpForm = () => {
         <input
           type="text"
           id="LastName"
-          name="last_name"
+          name="lastName" // Update name to match formData
+          value={formData.lastName} // Bind value to formData
+          onChange={handleChange} // Use handleChange
           className="mt-1 w-full rounded-md border-gray-300 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
         />
       </div>
@@ -63,7 +103,9 @@ const SignUpForm = () => {
         <input
           type="email"
           id="Email"
-          name="email"
+          name="email" // Update name to match formData
+          value={formData.email} // Bind value to formData
+          onChange={handleChange} // Use handleChange
           className="mt-1 w-full rounded-md border-gray-300 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
         />
       </div>
@@ -78,9 +120,9 @@ const SignUpForm = () => {
         <input
           type={showPassword ? "text" : "password"}
           id="Password"
-          name="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          name="password" // Update name to match formData
+          value={formData.password} // Bind value to formData
+          onChange={handleChange} // Use handleChange
           className="mt-1 w-full rounded-md border-gray-300 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
         />
         <button
@@ -104,12 +146,12 @@ const SignUpForm = () => {
           Password Confirmation
         </label>
         <input
-          type={"password"}
+          type="password"
           id="PasswordConfirmation"
-          name="password_confirmation"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          className="mt -1 w-full rounded-md border-gray-300 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
+          name="password_confirmation" // This can remain as is
+          value={confirmPassword} // Bind value to confirmPassword state
+          onChange={(e) => setConfirmPassword(e.target.value)} // Update confirmPassword state
+          className="mt-1 w-full rounded-md border-gray-300 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
         />
       </div>
 
@@ -130,7 +172,10 @@ const SignUpForm = () => {
       </div>
 
       <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-        <button className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white">
+        <button
+          type="submit" // Ensure the button type is set to "submit"
+          className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white"
+        >
           Create an account
         </button>
 

@@ -1,5 +1,5 @@
+import Footer from "@/components/footer";
 import "./globals.css";
-import Footer from "@/app/components/footer";
 
 export const metadata = {
   title: "Create Next App",

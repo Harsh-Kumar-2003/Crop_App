@@ -1,5 +1,6 @@
+//user/signup
 import SignUpForm from "@/components/forms/SignUpForm";
-import Footer from "../../../components/footer.jsx";
+import LoginWithGoogle from "@/components/LoginWithGoogle";
 
 export default function SignUp() {
   return (
@@ -24,12 +25,13 @@ export default function SignUp() {
             }}
           >
             <div className="max-w-xl lg:max-w-3xl">
+              <img className="h-16 w-16" alt="logo" src="/fieldmaven.png" />
               <h1 className="mt-6 text-2xl font-bold text-yellow-300 sm:text-3xl md:text-4xl ">
                 Welcome to FieldMaven
               </h1>
 
               <p
-                className="mt-4 text-yellow-600 text-lg font-serif italic"
+                className="mt-4 text-yellow-400 text-lg font-serif italic"
                 style={{
                   fontFamily: "'Dancing Script', cursive",
                   letterSpacing: "0.5px",
@@ -40,12 +42,14 @@ export default function SignUp() {
                 Farming. Log in to unlock insights, optimize yields, and lead
                 the way to sustainable success."
               </p>
+
               <SignUpForm />
+              <LoginWithGoogle />
             </div>
           </main>
         </div>
       </section>
-      <Footer />
+         
     </div>
   );
 }

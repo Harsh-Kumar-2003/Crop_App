@@ -8,7 +8,7 @@ import logo from "@/public/images/logo.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 
-import { images } from "@/lib/images";
+import { images } from "@/libs/images";
 
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -54,7 +54,7 @@ export default function Page() {
               Contact
             </a>
           </div>
-          <Link href="/signup">
+          <Link href="/user/login">
             <button className="mx-11 px-6 py-2 bg-green-800 text-white rounded-xl hover:bg-indigo-600">
               Login
             </button>
@@ -113,7 +113,7 @@ export default function Page() {
           navigation={true}
           autoplay={{
             delay: 3000,
-            disableOnInteraction: false, 
+            disableOnInteraction: false,
           }}
           thumbs={{
             swiper:
@@ -140,7 +140,6 @@ export default function Page() {
     </div>
   );
 }
-
 
 // "use client";
 // import "./globals.css";
