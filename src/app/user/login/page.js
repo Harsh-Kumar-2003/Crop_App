@@ -68,7 +68,7 @@ export default function Login() {
             }}
           >
             <div className="max-w-xl lg:max-w-3xl">
-              <img className="h-16 w-16" alt="logo" src="/fieldmaven.png" />
+              <img className="h-16 w-16" alt="logo" src="/fieldmaven1.png" />
               <h1 className="mt-6 text-2xl font-bold text-yellow-300 sm:text-3xl md:text-4xl ">
                 Welcome Back to FieldMaven
               </h1>

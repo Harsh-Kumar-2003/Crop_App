@@ -7,15 +7,13 @@ export const metadata = {
 };
 
 export default function UserLayout({ children, params }) {
-  // Access the dynamic user parameter from params
-  const { user } = params;
-
   return (
     <html lang="en">
       <body>
-        <main>
+        <main className="flex flex-col">
+          {/* Sidebar is persistent and overlays content */}
           <Sidebar params={params} />
-          {children}
+          <div className="ml-8">{children}</div>
         </main>
       </body>
     </html>

@@ -13,7 +13,6 @@ export default function UserLayout({ children, params }) {
   return (
     <html lang="en">
       <body>
-        <Sidebar params={params} />
         <main>{children}</main>
       </body>
     </html>
