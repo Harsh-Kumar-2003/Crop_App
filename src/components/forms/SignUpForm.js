@@ -42,7 +42,6 @@ const SignUpForm = () => {
         password,
         name: `${firstName} ${lastName}`,
         mode: "signup", // Specify mode for signup
-        redirect: false,
       });
 
       if (result.error) {

@@ -121,6 +121,7 @@ export const authOptions = {
       console.log("Redirect callback triggered");
       console.log("Redirecting to URL:", url);
       console.log("Base URL:", baseUrl);
+      console.log("Callback URL:", url);
 
       // Redirect to a dynamic user-specific route after login
       if (url === `${baseUrl}/user/login` || url === `${baseUrl}/user/signup`) {

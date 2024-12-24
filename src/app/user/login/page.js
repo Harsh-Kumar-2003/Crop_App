@@ -33,7 +33,8 @@ export default function Login() {
       const result = await signIn("credentials", {
         email,
         password,
-        mode: "login", // Specify mode for signup
+        mode: "login",
+        // Specify mode for signup
       });
 
       if (result.error) {
@@ -169,7 +170,7 @@ export default function Login() {
                     <p className="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-400">
                       Don't have an account?
                       <a
-                        href="/user/login"
+                        href="/user/signup"
                         className="text-gray-700 underline dark:text-gray-200"
                       >
                         {" "}
