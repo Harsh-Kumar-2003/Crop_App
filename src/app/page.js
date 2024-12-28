@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/public/images/logo.jpg";
@@ -8,17 +8,32 @@ import logo from "@/public/images/logo.jpg";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs, Autoplay } from "swiper/modules";
 
-import { images } from "@/libs/images";
-
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import { cards } from "@/libs/images";
 
 export default function Page() {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const [isSpecificScreenSize, setIsSpecificScreenSize] = useState(false);
+
+  useEffect(() => {
+    const updateScreenSize = () => {
+      // Set the condition for when the screen size exceeds 1043x1083
+      setIsSpecificScreenSize(
+        window.innerWidth <= 1043 && window.innerHeight <= 1083
+      );
+    };
+
+    updateScreenSize(); // Initial check
+    window.addEventListener("resize", updateScreenSize);
+
+    return () => window.removeEventListener("resize", updateScreenSize);
+  }, []);
 
   return (
     <div className="h-screen overflow-hidden flex flex-col">
@@ -122,19 +137,25 @@ export default function Page() {
           modules={[FreeMode, Navigation, Thumbs, Autoplay]}
           className="h-full"
         >
-          {images.map((image, index) => (
+          {/* {cards.map((card, index) => (
             <SwiperSlide key={index}>
-              <div className="h-full w-full">
-                <Image
-                  src={image.src}
-                  alt={image.alt}
-                  fill
-                  className="object-cover "
-                />
-                {/* rounded-3xl */}
+              <div className="flex justify-center h-full bg-yellow-100">
+                {card.component}
               </div>
             </SwiperSlide>
-          ))}
+          ))} */}
+          {cards
+            .filter(
+              (_, index) =>
+                !(isSpecificScreenSize && (index === 1 || index === 2)) // Exclude CardB and CardC when the condition is met
+            )
+            .map((card, index) => (
+              <SwiperSlide key={index}>
+                <div className="flex justify-center h-full bg-yellow-100">
+                  {card.component}
+                </div>
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
     </div>
