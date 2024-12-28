@@ -20,7 +20,8 @@ const CardB = () => {
         className="w-full h-full object-cover rounded-lg"
       ></Image> */}
       <h1 className="text-8xl font-bold text-center text-white relative top-10 left-10">
-        Crop <br /> Recomendation
+        Crop <br />
+        Recommendation
         <hr className="w-1/2 mx-auto relative left-28 border-t-2" />
       </h1>
       <div className="text-white text-3xl my-32 text-center relative bottom-20 left-64 hidden lg:block">
