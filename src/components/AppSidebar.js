@@ -1,11 +1,9 @@
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import React from "react";
-import { useRouter } from "next/router";
 
-export default function AppSidebar({ params }) {
+export default function AppSidebar({ user }) {
   const path = usePathname();
-  const user = params.user;
 
   return (
     <nav
@@ -15,54 +13,57 @@ text-black"
       <Link
         href={`/user/${user}/profile`} // Use the dynamic uri in the href
         className={`flex gap-4 p-2 ${
-          path === `/user/${user}/profile` ? "text-blue-500" : ""
+          path === `/user/${user}/profile` ? "text-blue-600" : ""
         }`} // Check if the current path matches
       >
         <span>Profile</span>
       </Link>
 
       <Link
-        href={"/admin/appointments"}
+        href={`/user/${user}/cropRecommendation`}
         className={
           "flex gap-4 p-2 " +
-          (path === "/admin/appointments" ? "text-blue-500" : "")
+          (path === `/user/${user}/cropRecommendation` ? "text-green-500" : "")
         }
       >
-        <span>Appointments</span>
+        <span>Crop Recommendation</span>
       </Link>
 
       <Link
-        href={"/admin/reviews"}
-        className={
-          "flex gap-4 p-2 " + (path === "/admin/reviews" ? "text-blue-500" : "")
-        }
-      >
-        <span>Reviews</span>
-      </Link>
-
-      <Link
-        href={"/admin/revenue"}
-        className={
-          "flex gap-4 p-2 " + (path === "/admin/revenue" ? "text-blue-500" : "")
-        }
-      >
-        <span>Revenue</span>
-      </Link>
-
-      <Link
-        href={"/admin/task"}
-        className={
-          "flex gap-4 p-2 " + (path === "/admin/task" ? "text-blue-500" : "")
-        }
-      >
-        <span>Task Management</span>
-      </Link>
-
-      <Link
-        href={"/admin/notifications"}
+        href={`/user/${user}/soilConditioning`}
         className={
           "flex gap-4 p-2 " +
-          (path === "/admin/notifications" ? "text-blue-500" : "")
+          (path === `/user/${user}/soilConditioning` ? "text-amber-700" : "")
+        }
+      >
+        <span>Soil Conditioning</span>
+      </Link>
+
+      <Link
+        href={`/user/${user}/weatherUpdates`}
+        className={
+          "flex gap-4 p-2 " +
+          (path === `/user/${user}/weatherUpdates` ? "text-sky-500" : "")
+        }
+      >
+        <span>Weather Updates</span>
+      </Link>
+
+      <Link
+        href={`/user/${user}/pestManagement`}
+        className={
+          "flex gap-4 p-2 " +
+          (path === `/user/${user}/pestManagement` ? "text-red-600" : "")
+        }
+      >
+        <span>Pest Management</span>
+      </Link>
+
+      <Link
+        href={`/user/${user}/notifications`}
+        className={
+          "flex gap-4 p-2 " +
+          (path === `/user/${user}/notifications` ? "text-yellow-500" : "")
         }
       >
         <span>Notifications</span>

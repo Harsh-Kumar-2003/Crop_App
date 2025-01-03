@@ -8,8 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import LogoutButton from "./LogOutButton";
 
-const Sidebar = ({ params }) => {
-  const user = params.user;
+const Sidebar = ({ user }) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const toggleNav = () => {
@@ -56,7 +55,7 @@ const Sidebar = ({ params }) => {
             <Link
               href="/"
               className="text-center mt-4 flex gap-1 items-center justify-center 
-              bg-gradient-to-r from-white to-blue-400 
+              bg-gradient-to-r from-white to-green-400 
               text-white font-semibold 
               py-2 px-4 rounded-lg 
               shadow-lg transition duration-300 ease-in-out 
@@ -64,7 +63,7 @@ const Sidebar = ({ params }) => {
             >
               <span className="text-xl text-black">Home</span>
             </Link>
-            <Link
+            {/* <Link
               href="/admin"
               className="text-center mt-4 flex gap-1 items-center justify-center 
               bg-gradient-to-r from-white to-blue-400 
@@ -74,14 +73,16 @@ const Sidebar = ({ params }) => {
               hover:shadow-xl hover:scale-105"
             >
               <span className="text-xl text-black">Administrator</span>
-            </Link>
+            </Link> */}
           </div>
           <Divider />
           <div className="text-center">
-            <AppSidebar params={params} />
+            <AppSidebar user={user} />
           </div>
           <Divider />
-          <LogoutButton />
+          <div className="text-center">
+            <LogoutButton />
+          </div>
         </div>
       </aside>
     </div>
