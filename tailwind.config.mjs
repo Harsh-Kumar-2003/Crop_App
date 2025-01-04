@@ -10,6 +10,9 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        brown: {
+          500: "#A52A2A", // You can adjust the shade of brown here
+        },
       },
     },
   },
