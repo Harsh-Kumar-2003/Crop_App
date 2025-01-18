@@ -9,6 +9,7 @@ import LoginForm from "@/components/forms/LoginForm";
 import SignUpForm from "@/components/forms/SignUpForm";
 import LoginWithGoogle from "@/components/LoginWithGoogle";
 import Link from "next/link";
+import bg_login from "@/public/images/bg_login.png";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -48,19 +49,38 @@ export default function Login() {
   };
 
   return (
-    <div>
-      <section className="bg-blue-100 dark:bg-blue-900">
-        <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
-          <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
+    <div className="h-screen">
+      <section className="">
+        <div
+          className="border-2 border-white w-full h-screen "
+          style={{
+            backgroundImage: `url(${bg_login.src})`,
+            backgroundSize: "cover",
+          }}
+        >
+          <img
+            className="h-14 w-14 relative left-5 top-5"
+            alt="logo"
+            src="/fieldmaven1.png"
+          />
+          {/* <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
             <img
               alt=""
               src="/signup_image.jpeg"
               className="absolute inset-0 h-full w-full object-cover"
             />
-          </aside>
+          </aside> */}
+          <p
+            className="bg-white opacity-20 text-black text-4xl font-semibold w-72 h-12 rounded-lg relative left-1/3 mx-28 text-center"
+            style={{
+              fontFamily: "'Dancinf Script', cursive",
+            }}
+          >
+            Login
+          </p>
 
           <main
-            className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
+            className="bg-white ml-9 bg-opacity-20 shadow-xl h-3/4 w-max relative left-80 bottom-7 rounded-lg"
             style={{
               fontFamily: "'Dancing Script', cursive",
               color: "#4a4a4a",
@@ -69,8 +89,7 @@ export default function Login() {
             }}
           >
             <div className="max-w-xl lg:max-w-3xl">
-              <img className="h-16 w-16" alt="logo" src="/fieldmaven1.png" />
-              <h1 className="mt-6 text-2xl font-bold text-yellow-300 sm:text-3xl md:text-4xl ">
+              {/* <h1 className="mt-6 text-2xl font-bold text-yellow-300 sm:text-3xl md:text-4xl ">
                 Welcome Back to FieldMaven
               </h1>
 
@@ -85,17 +104,17 @@ export default function Login() {
                 "Welcome back to FieldMaven – Empowering Your Farming Journey.
                 Log in to access personalized insights, manage your fields, and
                 continue paving the way to sustainable success."
-              </p>
+              </p> */}
               {/* <LoginForm /> */}
               <div>
                 <form
                   onSubmit={handleSubmit}
-                  className="mt-8 grid grid-cols-6 gap-6"
+                  className="mt-8 grid grid-cols-6 gap-6 relative top-9"
                 >
-                  <div className="col-span-6">
+                  <div className="col-span-6 mx-4 ">
                     <label
                       htmlFor="Email"
-                      className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+                      className="block text-white text-sm font-medium  dark:text-gray-200"
                     >
                       Email
                     </label>
@@ -105,14 +124,14 @@ export default function Login() {
                       name="email" // Update name to match formData
                       value={formData.email} // Bind value to formData
                       onChange={handleChange} // Use handleChange
-                      className="mt-1 w-full rounded-md border-gray-300 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
+                      className="mt-1 w-full rounded-md border-gray-300 bg-white bg-opacity-40 text-sm text-black shadow-sm dark:border-gray-100 dark:bg-gray-800 dark:text-gray-200 p-2"
                     />
                   </div>
 
-                  <div className="col-span-6 sm:col-span-3 relative">
+                  <div className="col-span-6  mx-4 w-11/12">
                     <label
                       htmlFor="Password"
-                      className="block text-sm font-medium text-gray-700 dark:text-gray-200"
+                      className="block text-sm font-medium text-white dark:text-gray-200 w-max"
                     >
                       Password
                     </label>
@@ -122,27 +141,27 @@ export default function Login() {
                       name="password" // Update name to match formData
                       value={formData.password} // Bind value to formData
                       onChange={handleChange} // Use handleChange
-                      className="mt-1 w-full rounded-md border-gray-300 bg-white text-sm text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-gray-200 p-2"
+                      className="mt-1 w-full rounded-md border-gray-300 bg-white bg-opacity-40 text-sm text-black shadow-sm dark:border-gray-100 dark:bg-gray-800 dark:text-gray-200 p-2"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute inset-y-0 right-0 flex items-center pr-3 pt-5"
+                      className="absolute right-0 bottom-48 top-28 flex items-center pr-3"
                     >
                       {showPassword ? (
-                        <EyeOffIcon className="h-5 w-5 text-gray-500" />
+                        <EyeOffIcon className="h-6 w-6 text-gray-500 " />
                       ) : (
-                        <EyeIcon className="h-5 w-5 text-gray-500" />
+                        <EyeIcon className="h-6 w-6 text-white opacity-40" />
                       )}
                     </button>
                   </div>
 
-                  <div className="col-span-6">
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                  <div className="col-span-6 mx-4">
+                    <p className="text-sm text-white dark:text-gray-400">
                       By using our services, you agree to our
                       <a
                         href="#"
-                        className="text-gray-700 underline dark:text-gray-200"
+                        className="text-red-300 underline dark:text-gray-200"
                       >
                         {" "}
                         terms and conditions{" "}
@@ -150,7 +169,7 @@ export default function Login() {
                       and
                       <a
                         href="#"
-                        className="text-gray-700 underline dark:text-gray-200"
+                        className="text-red-300 underline dark:text-gray-200"
                       >
                         {" "}
                         privacy policy{" "}
@@ -159,24 +178,23 @@ export default function Login() {
                     </p>
                   </div>
 
-                  <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
+                  <div className="w-80 mx-72">
                     <button
                       type="submit" // Ensure the button type is set to "submit"
-                      className="inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white"
+                      className="my-6  inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white"
                     >
                       Log In Now
                     </button>
 
-                    <p className="mt-4 text-sm text-gray-500 sm:mt-0 dark:text-gray-400">
+                    <p className="mt-4 -mx-8 text-sm text-white sm:mt-0 dark:text-gray-400">
                       Don't have an account?
                       <a
                         href="/user/signup"
-                        className="text-gray-700 underline dark:text-gray-200"
+                        className="text-red-300 underline dark:text-gray-200"
                       >
                         {" "}
                         Create Now{" "}
                       </a>
-                      .
                     </p>
                   </div>
                 </form>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-export default function ProfileForm({ onClose }) {
+export default function ProfileForm({ closeForm }) {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [location, setLocation] = useState(null);
@@ -46,17 +46,17 @@ export default function ProfileForm({ onClose }) {
 
   const handleSaveChanges = (e) => {
     e.preventDefault();
-    alert("Profile details saved!");
-    onClose(); // Close the popup on successful save
+
+    closeForm(); 
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="w-full h-full bg-white p-6 rounded-lg shadow-lg">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="w-full sm:w-96 bg-white p-6 rounded-lg shadow-lg">
         <h2 className="text-xl text-center font-bold mb-4">
           Update Your Profile
         </h2>
-        <form onSubmit={handleSaveChanges} className="w-full h-full">
+        <form className="w-full h-full">
           <div className="my-2">
             <label className="block text-sm font-medium">Name</label>
             <input
@@ -83,6 +83,7 @@ export default function ProfileForm({ onClose }) {
               placeholder="Enter your phone number"
             />
           </div>
+
           <div className="my-2">
             <label className="block text-sm font-medium">Latitude</label>
             <input
@@ -93,17 +94,16 @@ export default function ProfileForm({ onClose }) {
               onChange={(e) => setLatitude(e.target.value)}
             />
           </div>
+
           <div className="my-2">
-            <label className="block text-sm font-medium">
-              Longitude
-              <input
-                type="text"
-                className="w-full rounded border p-2"
-                value={longitude}
-                placeholder="Enter Longitude"
-                onChange={(e) => setLongitude(e.target.value)}
-              />
-            </label>
+            <label className="block text-sm font-medium">Longitude</label>
+            <input
+              type="text"
+              className="w-full rounded border p-2"
+              value={longitude}
+              placeholder="Enter Longitude"
+              onChange={(e) => setLongitude(e.target.value)}
+            />
           </div>
 
           {error && <p>{error}</p>}
@@ -139,6 +139,7 @@ export default function ProfileForm({ onClose }) {
           </div>
 
           <button
+            onClick={handleSaveChanges}
             type="submit"
             className="w-full bg-green-600 text-white py-2 rounded"
           >
