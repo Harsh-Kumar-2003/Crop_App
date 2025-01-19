@@ -29,23 +29,42 @@ export default function Login() {
     e.preventDefault();
     const { email, password } = formData;
     // Proceed with form submission
-    try {
-      const result = await signIn("credentials", {
-        email,
-        password,
-        mode: "login",
-        // Specify mode for signup
-      });
 
-      if (result.error) {
-        alert(result.error); // Display error message
-      } else {
-        alert("Login successful! Redirecting...");
-      }
-    } catch (error) {
-      alert("Something went wrong. Please try again.");
+    const result = await signIn("credentials", {
+      email,
+      password,
+      mode: "login",
+      // Specify mode for signup
+    });
+
+    if (result.error) {
+      alert(result.error); // Display error message
+    } else {
+      alert("Login successful! Redirecting...");
     }
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const { email, password } = formData;
+  //   // Proceed with form submission
+  //   try {
+  //     const result = await signIn("credentials", {
+  //       email,
+  //       password,
+  //       mode: "login",
+  //       // Specify mode for signup
+  //     });
+
+  //     if (result.error) {
+  //       alert(result.error); // Display error message
+  //     } else {
+  //       alert("Login successful! Redirecting...");
+  //     }
+  //   } catch (error) {
+  //     alert("Something went wrong. Please try again.");
+  //   }
+  // };
 
   return (
     <div>

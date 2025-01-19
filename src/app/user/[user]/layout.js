@@ -14,7 +14,7 @@ export default function UserLayout({ children, params }) {
       <body>
         <main className="flex flex-col">
           {/* Sidebar is persistent and overlays content */}
-          <Sidebar user={user} />
+
           <div className="ml-8">{children}</div>
         </main>
       </body>

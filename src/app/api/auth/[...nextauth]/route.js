@@ -127,6 +127,12 @@ export const authOptions = {
       if (url === `${baseUrl}/user/login` || url === `${baseUrl}/user/signup`) {
         return `${baseUrl}/user/`;
       }
+      if (
+        url === `http://192.168.29.127:3000/user/login` ||
+        url === `http://192.168.29.127:3000/user/signup`
+      ) {
+        return `http://192.168.29.127:3000/user/`;
+      }
 
       // Allow other valid redirections
       // if (url.startsWith("/")) return ${baseUrl}${url};

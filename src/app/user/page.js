@@ -23,7 +23,7 @@ export default async function UserHome() {
   }
 
   // Redirect to the user's dynamic URL based on their UUID
-  redirect(`/user/${user.uuid}`);
+  redirect(`/user/${user.uuid}/profile`);
 
   return null; // This component will never render due to redirection
 }
