@@ -38,7 +38,7 @@ export default function Page() {
   return (
     <div className="h-screen overflow-hidden flex flex-col">
       {/* Navbar */}
-      <nav className="w-full my-1">
+      <nav className="w-full my-1" id="navBar">
         <div className="h-16 mx-auto px-4 container flex items-center justify-between">
           <div className="mx-8">
             <Image
@@ -121,7 +121,7 @@ export default function Page() {
       </nav>
 
       {/* Swiper Content */}
-      <div className="flex-grow relative">
+      <div className="flex-grow relative top-11">
         <Swiper
           loop={true}
           spaceBetween={10}

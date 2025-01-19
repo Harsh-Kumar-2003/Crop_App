@@ -5,3 +5,12 @@
 html {
   scroll-behavior: smooth;
 }
+
+#navBar {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  height: 70px;
+  background: #ffff;
+  margin-top: -1px;
+}

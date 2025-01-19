@@ -13,7 +13,7 @@ const CardA = () => {
         backgroundPosition: "center",
       }}
     >
-      <h1 className="text-3xl sm:text-7xl lg:text-8xl font-bold text-center text-white relative top-40 left-5 ">
+      <h1 className="text-3xl sm:text-7xl lg:text-8xl font-bold text-center text-white relative top-48 left-5 ">
         CROP MANAGEMENT <br /> SYSTEM
       </h1>
       <div className="text-black-600" id="soil"></div>
