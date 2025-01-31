@@ -10,23 +10,38 @@ export const metadata = {
 export default async function RoutesLayout({ children, params }) {
   const { user } = await params;
   console.log("user", user);
-  return (
-    <html lang="en">
-      <body>
-        <main className="flex flex-col bg-green-900">
-          {/* Sidebar is persistent and overlays content */}
-          <Sidebar user={user} />
 
-          <nav className=" bg-blue-200 pl-16 pr-4 flex flex-row items-center relative">
-            <img className="w-16" src="/fieldmaven1.png" />
-            <span className="text-2xl font-bold px-4">
-              Hello, Fieldmaven user
-            </span>
-            <LogoutButton className="absolute right-4" />
-          </nav>
-          <div className="">{children}</div>
-        </main>
-      </body>
-    </html>
+  let userName;
+
+  try {
+    const uri = process.env.URL;
+    const response = await fetch(`${uri}/api/nameByUuid?uuid=${user}`, {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status} - ${response.statusText}`);
+    }
+
+    userName = await response.json();
+    console.log("User Name:", userName);
+  } catch (error) {
+    console.error("Failed to fetch user:", error.message);
+  }
+
+  return (
+    <>
+      <main className="flex flex-col bg-green-900">
+        {/* Sidebar is persistent and overlays content */}
+        <Sidebar user={user} />
+
+        <nav className="bg-blue-200 pl-16 pr-4 flex flex-row items-center relative">
+          <img className="w-16" src="/fieldmaven1.png" alt="Fieldmaven Logo" />
+          <span className="text-2xl font-bold px-4">Hello, {userName}</span>
+          <LogoutButton className="absolute right-4" />
+        </nav>
+        <div>{children}</div>
+      </main>
+    </>
   );
 }

@@ -1,152 +1,231 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import dynamic from "next/dynamic";
+import LeafletMapModal from "../LeafletMapModal";
 
-export default function ProfileForm({ closeForm }) {
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
-  const [location, setLocation] = useState(null);
-  const [error, setError] = useState(null);
+export default function ProfileForm({ uuid }) {
+  const [formData, setFormData] = useState({
+    uuid: uuid,
+    location: "",
+    latitude: "",
+    longitude: "",
+    farmSize: "",
+    soilType: "",
+  });
 
-  useEffect(() => {
-    const handleGetLocation = async () => {
-      try {
-        if (!latitude || !longitude) {
-          setError("");
-          setLocation(null);
-          return;
-        }
+  const [isMapOpen, setIsMapOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const API_KEY = "0625a2822ede4414b2ada64050b5cd05"; //geocoder api key
 
-        setError(null);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-        const apiKey = "0625a2822ede4414b2ada64050b5cd05";
-        const response = await fetch(
-          `https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=${apiKey}`
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch location.");
-        }
-
-        const data = await response.json();
-        if (data.results && data.results.length > 0) {
-          setLocation(data.results[0].formatted);
-        } else {
-          setError("No location found for the given coordinates.");
-          setLocation(null);
-        }
-      } catch (err) {
-        setError(err.message || "An error occurred.");
-        setLocation(null);
-      }
-    };
-
-    handleGetLocation();
-  }, [latitude, longitude]);
-
-  const handleSaveChanges = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
+    //api call to save profile
 
-    closeForm(); 
+    try {
+      const response = await fetch(`/api/profile?uuid=${formData.uuid}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || "Failed to create profile");
+      }
+
+      console.log("Profile Created Successfully:", result);
+
+      if (onSubmit) {
+        onSubmit(result);
+      }
+    } catch (error) {
+      console.error("Error creating profile:", error);
+    }
+  };
+
+  const fetchCoordinates = async () => {
+    if (!formData.location.trim())
+      return alert("Please enter a location name.");
+
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+          formData.location
+        )}&key=${API_KEY}`
+      );
+      const data = await response.json();
+      console.log(data);
+      if (data.results.length > 0) {
+        const { lat, lng } = data.results[0].geometry;
+        setFormData((prev) => ({ ...prev, latitude: lat, longitude: lng }));
+      } else {
+        alert("Location not found. Please enter a valid location.");
+      }
+    } catch (error) {
+      console.error("Error fetching coordinates:", error);
+      alert("Failed to fetch coordinates. Try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleMapSelect = (lat, lng) => {
+    setFormData((prev) => ({ ...prev, latitude: lat, longitude: lng }));
+    setIsMapOpen(false);
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="w-full sm:w-96 bg-white p-6 rounded-lg shadow-lg">
-        <h2 className="text-xl text-center font-bold mb-4">
-          Update Your Profile
-        </h2>
-        <form className="w-full h-full">
-          <div className="my-2">
-            <label className="block text-sm font-medium">Name</label>
-            <input
-              type="text"
-              className="w-full rounded border p-2"
-              placeholder="Enter your name"
-            />
-          </div>
+    <form
+      className="bg-white shadow-lg rounded-2xl p-6 max-w-3xl mx-auto my-8"
+      onSubmit={handleSubmit}
+    >
+      <h1 className="text-2xl font-bold text-gray-700 text-center mb-6">
+        Create Your Profile
+      </h1>
 
-          <div className="my-2">
-            <label className="block text-sm font-medium">Email</label>
-            <input
-              type="email"
-              className="w-full rounded border p-2"
-              placeholder="Enter your email"
-            />
-          </div>
-
-          <div className="my-2">
-            <label className="block text-sm font-medium">Phone</label>
-            <input
-              type="tel"
-              className="w-full rounded border p-2"
-              placeholder="Enter your phone number"
-            />
-          </div>
-
-          <div className="my-2">
-            <label className="block text-sm font-medium">Latitude</label>
-            <input
-              type="text"
-              className="w-full rounded border p-2"
-              value={latitude}
-              placeholder="Enter latitude"
-              onChange={(e) => setLatitude(e.target.value)}
-            />
-          </div>
-
-          <div className="my-2">
-            <label className="block text-sm font-medium">Longitude</label>
-            <input
-              type="text"
-              className="w-full rounded border p-2"
-              value={longitude}
-              placeholder="Enter Longitude"
-              onChange={(e) => setLongitude(e.target.value)}
-            />
-          </div>
-
-          {error && <p>{error}</p>}
-          {location && (
-            <div style={{ marginTop: "20px" }}>
-              <label>Location</label>
-              <p className="w-full rounded border p-2">{location}</p>
-            </div>
-          )}
-
-          <div className="my-2">
-            <label className="block text-sm font-medium">
-              Farm Size (in acres)
-            </label>
-            <input
-              type="number"
-              className="w-full rounded border p-2"
-              placeholder="Enter farm size"
-            />
-          </div>
-
-          <div className="my-2">
-            <label className="block text-sm font-medium">Soil Type</label>
-            <select className="w-full rounded border p-2">
-              <option value="">Select soil type</option>
-              <option value="sandy">Sandy</option>
-              <option value="clay">Clay</option>
-              <option value="silt">Silt</option>
-              <option value="peat">Peat</option>
-              <option value="chalk">Chalk</option>
-              <option value="loam">Loam</option>
-            </select>
-          </div>
-
-          <button
-            onClick={handleSaveChanges}
-            type="submit"
-            className="w-full bg-green-600 text-white py-2 rounded"
-          >
-            Save Changes
-          </button>
-        </form>
+      {/* Location */}
+      <div className="flex flex-col">
+        <label htmlFor="location" className="text-sm text-gray-600 font-medium">
+          Location <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          id="location"
+          name="location"
+          value={formData.location}
+          onChange={handleChange}
+          className="mt-2 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 outline-none"
+          placeholder="Enter your location"
+        />
       </div>
-    </div>
+
+      <div className="flex gap-3 mt-3">
+        <button
+          type="button"
+          className="bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition-all shadow-md"
+          onClick={fetchCoordinates}
+          disabled={loading}
+        >
+          {loading ? "Fetching..." : "Fetch Coordinates"}
+        </button>
+
+        <button
+          type="button"
+          className="bg-green-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-600 transition-all shadow-md"
+          onClick={() => setIsMapOpen(true)}
+        >
+          Pick on Map
+        </button>
+      </div>
+
+      {/* Latitude */}
+      <div className="flex flex-col">
+        <label htmlFor="latitude" className="text-sm text-gray-600 font-medium">
+          Latitude <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          id="latitude"
+          name="latitude"
+          value={formData.latitude}
+          onChange={handleChange}
+          className="mt-2 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 outline-none"
+          placeholder="Enter latitude"
+        />
+      </div>
+
+      {/* Longitude */}
+      <div className="flex flex-col">
+        <label
+          htmlFor="longitude"
+          className="text-sm text-gray-600 font-medium"
+        >
+          Longitude <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="text"
+          id="longitude"
+          name="longitude"
+          value={formData.longitude}
+          onChange={handleChange}
+          className="mt-2 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 outline-none"
+          placeholder="Enter longitude"
+        />
+      </div>
+
+      {/* Farm Size */}
+      <div className="flex flex-col">
+        <label htmlFor="farmSize" className="text-sm text-gray-600 font-medium">
+          Farm Size (in acres) <span className="text-red-500">*</span>
+        </label>
+        <input
+          type="number"
+          id="farmSize"
+          name="farmSize"
+          value={formData.farmSize}
+          onChange={handleChange}
+          required
+          min={0}
+          className="mt-2 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 outline-none"
+          placeholder="Enter farm size in acres"
+        />
+      </div>
+
+      {/* Soil Type */}
+      <div className="flex flex-col">
+        <label htmlFor="soilType" className="text-sm text-gray-600 font-medium">
+          Soil Type <span className="text-red-500">*</span>
+        </label>
+        <select
+          id="soilType"
+          name="soilType"
+          value={formData.soilType}
+          onChange={handleChange}
+          required
+          className="mt-2 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-green-500 outline-none"
+        >
+          <option value="Alluvial Soil">Alluvial Soil</option>
+          <option value="Black Soil">Black Soil</option>
+          <option value="Red Soil">Red Soil</option>
+          <option value="Laterite Soil">Laterite Soil</option>
+          <option value="Mountain/Forest Soil">Mountain/Forest Soil</option>
+          <option value="Desert Soil">Desert Soil</option>
+          <option value="Saline Soil">Saline Soil</option>
+          <option value="Peaty Soil">Peaty Soil</option>
+          <option value="Sandy Soil">Sandy Soil</option>
+          <option value="Sub-Montane Soil">Sub-Montane Soil</option>
+        </select>
+      </div>
+
+      <div className="flex justify-center mt-8">
+        <button
+          type="submit"
+          className="bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-all shadow-md"
+        >
+          Save Profile
+        </button>
+      </div>
+
+      {isMapOpen && (
+        <LeafletMapModal
+          onSelect={handleMapSelect}
+          onClose={() => setIsMapOpen(false)}
+        />
+      )}
+    </form>
   );
 }
