@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Pencil } from "lucide-react";
+import LeafletMapModal from "../LeafletMapModal";
 
 export default function EditProfileButton({ profile }) {
   const [open, setOpen] = useState(false);
@@ -12,6 +13,10 @@ export default function EditProfileButton({ profile }) {
     farmSize: profile.farmSize || "",
     soilType: profile.soilType || "",
   });
+
+  const [isMapOpen, setIsMapOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const API_KEY = "0625a2822ede4414b2ada64050b5cd05";
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,9 +35,42 @@ export default function EditProfileButton({ profile }) {
 
       alert("Profile updated successfully!");
       setOpen(false); // Close modal after submission
+      window.location.reload(); // Reload the page to reflect changes
     } catch (error) {
       console.error(error.message);
     }
+  };
+
+  const fetchCoordinates = async () => {
+    if (!formData.location.trim())
+      return alert("Please enter a location name.");
+
+    setLoading(true);
+    try {
+      const response = await fetch(
+        `https://api.opencagedata.com/geocode/v1/json?q=${encodeURIComponent(
+          formData.location
+        )}&key=${API_KEY}`
+      );
+      const data = await response.json();
+      console.log(data);
+      if (data.results.length > 0) {
+        const { lat, lng } = data.results[0].geometry;
+        setFormData((prev) => ({ ...prev, latitude: lat, longitude: lng }));
+      } else {
+        alert("Location not found. Please enter a valid location.");
+      }
+    } catch (error) {
+      console.error("Error fetching coordinates:", error);
+      alert("Failed to fetch coordinates. Try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleMapSelect = (lat, lng) => {
+    setFormData((prev) => ({ ...prev, latitude: lat, longitude: lng }));
+    setIsMapOpen(false);
   };
 
   return (
@@ -72,6 +110,61 @@ export default function EditProfileButton({ profile }) {
                   className="w-full p-2 border rounded"
                 />
               </div>
+
+              <div className="flex gap-3 mt-3">
+                <button
+                  type="button"
+                  className="bg-blue-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-600 transition-all shadow-md"
+                  onClick={fetchCoordinates}
+                  disabled={loading}
+                >
+                  {loading ? "Fetching..." : "Fetch Coordinates"}
+                </button>
+
+                <button
+                  type="button"
+                  className="bg-green-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-600 transition-all shadow-md"
+                  onClick={() => setIsMapOpen(true)}
+                >
+                  Pick on Map
+                </button>
+                {isMapOpen && (
+                  <LeafletMapModal
+                    onSelect={handleMapSelect}
+                    onClose={() => setIsMapOpen(false)}
+                  />
+                )}
+
+                <button
+                  type="button"
+                  className="bg-purple-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-600 transition-all shadow-md"
+                  onClick={() => {
+                    if ("geolocation" in navigator) {
+                      navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                          const { latitude, longitude } = position.coords;
+                          setFormData((prev) => ({
+                            ...prev,
+                            latitude,
+                            longitude,
+                          }));
+                        },
+                        (error) => {
+                          console.error("Error fetching location:", error);
+                          alert(
+                            "Failed to fetch location. Please enable location services."
+                          );
+                        }
+                      );
+                    } else {
+                      alert("Geolocation is not supported by your browser.");
+                    }
+                  }}
+                >
+                  Use My Location
+                </button>
+              </div>
+
               <div>
                 <label className="block text-sm font-medium">Latitude</label>
                 <input

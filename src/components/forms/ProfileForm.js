@@ -11,7 +11,7 @@ export default function ProfileForm({ uuid }) {
     latitude: "",
     longitude: "",
     farmSize: "",
-    soilType: "",
+    soilType: "Alluvial Soil",
   });
 
   const [isMapOpen, setIsMapOpen] = useState(false);
@@ -47,10 +47,8 @@ export default function ProfileForm({ uuid }) {
       }
 
       console.log("Profile Created Successfully:", result);
-
-      if (onSubmit) {
-        onSubmit(result);
-      }
+      alert("Profile created successfully!");
+      window.location.reload();
     } catch (error) {
       console.error("Error creating profile:", error);
     }
@@ -129,6 +127,35 @@ export default function ProfileForm({ uuid }) {
           onClick={() => setIsMapOpen(true)}
         >
           Pick on Map
+        </button>
+
+        <button
+          type="button"
+          className="bg-purple-500 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-600 transition-all shadow-md"
+          onClick={() => {
+            if ("geolocation" in navigator) {
+              navigator.geolocation.getCurrentPosition(
+                (position) => {
+                  const { latitude, longitude } = position.coords;
+                  setFormData((prev) => ({
+                    ...prev,
+                    latitude,
+                    longitude,
+                  }));
+                },
+                (error) => {
+                  console.error("Error fetching location:", error);
+                  alert(
+                    "Failed to fetch location. Please enable location services."
+                  );
+                }
+              );
+            } else {
+              alert("Geolocation is not supported by your browser.");
+            }
+          }}
+        >
+          Use My Location
         </button>
       </div>
 

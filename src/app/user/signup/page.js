@@ -62,7 +62,6 @@ export default function SignUp() {
           </main>
         </div>
       </section>
-         
     </div>
   );
 }
