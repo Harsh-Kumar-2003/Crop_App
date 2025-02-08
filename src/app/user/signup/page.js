@@ -19,7 +19,7 @@ export default function SignUp() {
       >
         <div className="lg:grid lg:min-h-screen lg:grid-cols-12">
           <aside className="relative block h-16  lg:col-span-5 lg:h-full xl:col-span-6">
-            <Image src={logo} width={80} height={80}></Image>
+            <Image alt="image" src={logo} width={80} height={80}></Image>
 
             {/* <img
               alt=""

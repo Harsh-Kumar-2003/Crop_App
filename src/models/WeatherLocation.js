@@ -1,34 +1,46 @@
 import { Schema, model, models } from "mongoose";
 
 const WeatherLocationSchema = new Schema({
-  city: {
-    type: String,
-    required: true,
+  _id: String, // Format: "lat_long_date" (e.g., "28.61_77.23_2025-02-05")
+  location: {
+    lat: Number, // Truncated to 2 decimal places
+    lon: Number, // Truncated to 2 decimal places
   },
-  state: {
-    type: String,
-    required: true,
+  date: String, // Format: YYYY-MM-DD
+  today: {
+    weatherCode: Number, // Weather code (from API)
+    maxTemperature: Number, // temperature_2m_max
+    minTemperature: Number, // temperature_2m_min
+    maxApparentTemperature: Number, // apparent_temperature_max
+    minApparentTemperature: Number, // apparent_temperature_min
+    sunrise: String, // "HH:MM AM/PM" (convert from ISO 8601)
+    sunset: String, // "HH:MM AM/PM" (convert from ISO 8601)
+    daylightDuration: Number, // In seconds (from API)
+    precipitationSum: Number, // mm (precipitation_sum)
+    precipitationProbabilityMax: Number, // % (precipitation_probability_max)
+    maxWindSpeed: Number, // km/h (wind_speed_10m_max)
+    maxWindGusts: Number, // km/h (wind_gusts_10m_max)
+    dominantWindDirection: Number, // Degrees (wind_direction_10m_dominant)
   },
-  country: {
-    type: String,
-    required: true,
-  },
-  lat: {
-    type: Number,
-    required: true,
-  },
-  lon: {
-    type: Number,
-    required: true,
-  },
-  timezone: {
-    type: String,
-    required: true,
-  },
-  timezone_offset: {
-    type: Number,
-    required: true,
-  },
+  forecast: [
+    {
+      date: String, // Format: YYYY-MM-DD
+      weatherCode: Number, // Weather code (from API)
+      maxTemperature: Number, // temperature_2m_max
+      minTemperature: Number, // temperature_2m_min
+      maxApparentTemperature: Number, // apparent_temperature_max
+      minApparentTemperature: Number, // apparent_temperature_min
+      sunrise: String, // "HH:MM AM/PM" (convert from ISO 8601)
+      sunset: String, // "HH:MM AM/PM" (convert from ISO 8601)
+      daylightDuration: Number, // In seconds (from API)
+      precipitationSum: Number, // mm (precipitation_sum)
+      precipitationProbabilityMax: Number, // % (precipitation_probability_max)
+      maxWindSpeed: Number, // km/h (wind_speed_10m_max)
+      maxWindGusts: Number, // km/h (wind_gusts_10m_max)
+      dominantWindDirection: Number, // Degrees (wind_direction_10m_dominant)
+    },
+  ],
+  createdAt: { type: Date, default: Date.now },
 });
 
 const WeatherLocation =

@@ -35,6 +35,25 @@ const SignUpForm = () => {
       alert("Passwords do not match.");
       return;
     }
+    const name = `${firstName} ${lastName}`;
+    try {
+      const result = await signIn("credentials", {
+        name,
+        email,
+        password,
+        mode: "signup",
+        // redirect: false,
+        // Specify mode for signup
+      });
+
+      if (result.error) {
+        alert(result.error); // Display error message
+      } else {
+        alert("Login successful! Redirecting...");
+      }
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   return (
