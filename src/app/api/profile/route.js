@@ -1,9 +1,9 @@
 "use server";
 
 import { NextResponse } from "next/server";
-import mongoose from "mongoose";
+import mongoose, { get } from "mongoose";
 import Profile from "@/models/Profile";
-import User from "@/models/User";
+import { getAgroClimaticZone } from "@/actions/AgroClimaticZone";
 const uri = process.env.MONGODB_URI; // Your MongoDB connection string
 
 export async function POST(req) {
@@ -19,7 +19,16 @@ export async function POST(req) {
   }
 
   const body = await req.json();
+  const { latitude, longitude } = body;
+  const agroClimaticZone = await getAgroClimaticZone(latitude, longitude);
+  console.log("agroClimaticZone", agroClimaticZone);
+  if (!agroClimaticZone) {
+    body.agroClimaticZone = "Unknown";
+  } else {
+    body.agroClimaticZone = agroClimaticZone.properties.acr_name;
+  }
   const profile = new Profile(body);
+  console.log("post api call", body);
   await profile.save();
   return NextResponse.json({ status: 201 });
 }
@@ -29,6 +38,17 @@ export async function PUT(req) {
   const url = new URL(req.url);
   const uuid = url.searchParams.get("uuid");
   const body = await req.json();
+
+  const { latitude, longitude } = body;
+  const agroClimaticZone = await getAgroClimaticZone(latitude, longitude);
+  console.log("agroClimaticZone", agroClimaticZone);
+  if (!agroClimaticZone) {
+    body.agroClimaticZone = "Unknown";
+  } else {
+    body.agroClimaticZone = agroClimaticZone.properties.acr_name;
+    console.log("put api call", body);
+  }
+
   const profile = await Profile.findOneAndUpdate({ uuid: uuid }, body, {
     new: true,
   });

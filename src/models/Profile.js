@@ -40,6 +40,10 @@ const ProfileSchema = new Schema(
         "Sub-Montane Soil",
       ],
     },
+    agroClimaticZone: {
+      type: String,
+      required: false, // Optional; set to true if mandatory
+    },
   },
   { timestamps: true }
 );

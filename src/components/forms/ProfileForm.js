@@ -12,6 +12,7 @@ export default function ProfileForm({ uuid }) {
     longitude: "",
     farmSize: "",
     soilType: "Alluvial Soil",
+    agroClimaticZone: "",
   });
 
   const [isMapOpen, setIsMapOpen] = useState(false);
