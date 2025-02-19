@@ -136,23 +136,6 @@ export default async function WeatherUpdates({ params }) {
         return "bg-gray-200";
     }
   };
-
-  const getBackground = (condition) => {
-    switch (condition.toLowerCase()) {
-      case "sunny":
-        return "bg-gradient-to-r from-yellow-400 to-orange-500";
-      case "cloudy":
-        return "bg-gradient-to-r from-gray-400 to-gray-600";
-      case "rainy":
-        return "bg-gradient-to-r from-blue-500 to-blue-800";
-      case "stormy":
-        return "bg-gradient-to-r from-gray-800 to-black text-white";
-      case "partly cloudy":
-        return "bg-gradient-to-r from-gray-300 to-gray-500";
-      default:
-        return "bg-gray-200";
-    }
-  };
   const uri = process.env.URL;
   const today = new Date();
 
