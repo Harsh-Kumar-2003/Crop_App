@@ -14,6 +14,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.1",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@heroicons/react": "^1.0.6",
+    "@tailwindcss/postcss": "^4.0.6",
     "@turf/turf": "^7.2.0",
     "bcryptjs": "^2.4.3",
     "fs": "^0.0.1-security",
@@ -21,7 +22,7 @@
     "lucide-react": "^0.474.0",
     "mongodb": "^6.12.0",
     "mongoose": "^8.9.2",
-    "next": "15.1.0",
+    "next": "^15.1.7",
     "next-auth": "^4.24.11",
     "nodemailer": "^6.10.0",
     "openmeteo": "^1.1.4",
@@ -31,7 +32,7 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1"
+    "postcss": "^8.5.2",
+    "tailwindcss": "^3.4.17"
   }
 }

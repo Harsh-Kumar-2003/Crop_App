@@ -5,11 +5,10 @@
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
 import { signIn } from "next-auth/react";
-import LoginForm from "@/components/forms/LoginForm";
-import SignUpForm from "@/components/forms/SignUpForm";
 import LoginWithGoogle from "@/components/LoginWithGoogle";
+import Image from "next/image";
 import Link from "next/link";
-import bg_login from "@/public/images/bg_login.png";
+import irrigation from "@/public/images/irrigation.jpg";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -90,179 +89,223 @@ export default function Login() {
   // };
 
   return (
-    <div className="h-screen">
-      <section className="">
-        <div
-          className="border-2 border-white w-full h-screen "
-          style={{
-            backgroundImage: `url(${bg_login.src})`,
-            backgroundSize: "cover",
-          }}
-        >
-          <img
-            className="h-14 w-14 relative left-5 top-5"
-            alt="logo"
-            src="/fieldmaven1.png"
-          />
-          <p
-            className="bg-white opacity-20 text-black text-4xl font-semibold w-72 h-12 rounded-lg relative left-1/3 mx-28 text-center"
-            style={{
-              fontFamily: "'Dancinf Script', cursive",
-            }}
-          >
-            Login
-          </p>
-
-          <main
-            className="bg-white ml-9 bg-opacity-20 shadow-xl h-3/4 w-max relative left-80 bottom-7 rounded-lg"
-            style={{
-              fontFamily: "'Dancing Script', cursive",
-              color: "#4a4a4a",
-              letterSpacing: "0.5px",
-              textShadow: "0.5px 0.5px 2px rgba(0, 0, 0, 0.1)",
-            }}
-          >
-            <div className="max-w-xl lg:max-w-3xl">
-              <div>
-                <form
-                  onSubmit={handleSubmit}
-                  className="mt-8 grid grid-cols-6 gap-6 relative top-9"
-                >
-                  <div className="col-span-6 mx-4 ">
-                    <label
-                      htmlFor="Email"
-                      className="block text-white text-sm font-medium  dark:text-gray-200"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="Email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="mt-1 w-full rounded-md border-gray-300 bg-white bg-opacity-40 text-sm text-black shadow-sm dark:border-gray-100 dark:bg-gray-800 dark:text-gray-200 p-2"
-                    />
-                  </div>
-
-                  <div className="col-span-6  mx-4 w-11/12">
-                    <label
-                      htmlFor="Password"
-                      className="block text-sm font-medium text-white dark:text-gray-200 w-max"
-                    >
-                      Password
-                    </label>
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      id="Password"
-                      name="password"
-                      value={formData.password}
-                      onChange={handleChange}
-                      className="mt-1 w-full rounded-md border-gray-300 bg-white bg-opacity-40 text-sm text-black shadow-sm dark:border-gray-100 dark:bg-gray-800 dark:text-gray-200 p-2"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-0 bottom-48 top-28 flex items-center pr-3"
-                    >
-                      {showPassword ? (
-                        <EyeOffIcon className="h-6 w-6 text-gray-500 " />
-                      ) : (
-                        <EyeIcon className="h-6 w-6 text-white opacity-40" />
-                      )}
-                    </button>
-                  </div>
-
-                  <div className="col-span-6 mx-4">
-                    <p className="text-sm text-white dark:text-gray-400">
-                      By using our services, you agree to our
-                      <a
-                        href="#"
-                        className="text-red-300 underline dark:text-gray-200"
-                      >
-                        {" "}
-                        terms and conditions{" "}
-                      </a>
-                      and
-                      <a
-                        href="#"
-                        className="text-red-300 underline dark:text-gray-200"
-                      >
-                        {" "}
-                        privacy policy{" "}
-                      </a>
-                      .
-                    </p>
-                  </div>
-
-                  <div className="w-80 mx-72">
-                    <button
-                      type="submit"
-                      className="my-6  inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white"
-                    >
-                      Log In Now
-                    </button>
-
-                    <p className="mt-4 -mx-8 text-sm text-white sm:mt-0 dark:text-gray-400">
-                      Don't have an account?
-                      <a
-                        href="/user/signup"
-                        className="text-red-300 underline dark:text-gray-200"
-                      >
-                        {" "}
-                        Create Now{" "}
-                      </a>
-                    </p>
-                  </div>
-                </form>
-              </div>
-              <LoginWithGoogle />
-              <button
-                className="mt-4 text-sm text-blue-500 underline"
-                onClick={() => setShowModal(true)}
-              >
-                Forgot Password?
-              </button>
-            </div>
-          </main>
-        </div>
-      </section>
-
-      {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-semibold mb-4">Reset Password</h2>
-            <form onSubmit={handleResetPassword}>
-              <label
-                htmlFor="resetEmail"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                id="resetEmail"
-                name="resetEmail"
-                value={resetEmail}
-                onChange={(e) => setResetEmail(e.target.value)}
-                className="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2"
-              />
-              <button
-                type="submit"
-                className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md"
-              >
-                Reset Password
-              </button>
-            </form>
-            <button
-              className="mt-4 w-full bg-gray-600 text-white py-2 rounded-md"
-              onClick={() => setShowModal(false)}
+    <div
+      className=""
+      style={{
+        backgroundImage: `url(${irrigation.src})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}
+    >
+      <aside className="pl-3 bg-black bg-opacity-50 md:bg-transparent relative block h-16  lg:col-span-5 lg:h-full xl:col-span-6">
+        <Image
+          src="/fieldmaven1.png"
+          alt="A description of the image"
+          width={70}
+          height={70}
+          className="rounded-2xl "
+        ></Image>
+      </aside>
+      <div className="flex justify-center items-center">
+        <div className=" mt-2 mb-32 relative left-52 h-[480px] hidden md:flex justify-center items-center rounded-[62%_38%_24%_76%_/_59%_60%_40%_41%] shadow-[inset_20px_20px_20px_rgba(0,0,0,0.4),25px_35px_20px_rgba(0,0,0,0.09),25px_30px_30px_rgba(0,0,0,0.2),inset_-20px_-20px_25px_rgba(255,255,255,0.9)] transition-all duration-300 hover:rounded-full before:content-[''] before:absolute before:top-[50px] before:left-[85px] before:w-[35px] before:h-[35px] before:rounded-full before:bg-gray-200 before:opacity-90 after:content[' '] after:absolute after:top-[85px] after:left-[110px] after:width-[15px] after:height-[15px] after:rounded-full after:bg-slate-400 after:opacity-90">
+          <div className="relative flex justify-center items-center flex-col text-center p-10 gap-4">
+            <p className="font-bold text-black text-4xl mb-6">Login</p>
+            <form
+              action=""
+              onSubmit={handleSubmit}
+              className="text-black text-center flex flex-col items-center relative"
             >
-              Close
-            </button>
+              <div
+                className="relative w-4/5 h-14 shadow-[inset_10px_30px_10px_rgba(255,255,255,0.3),inset_-2px_-5px_10px_rgba(0,0,0,0.4),2px_2px_3px_rgba(255,255,255,1),5px_1px_5px_rgba(255,255,255,5)]
+              hover:shadow-[inset_20px_30px_10px_rgba(0,0,0,0.1),inset_2px_5px_10px_rgba(0,0,0,0.4),15px_15px_10px_rgba(0,0,0,0),15px_10px_15px_rgba(255,255,255,0.1)] rounded-3xl"
+              >
+                <input
+                  type="email"
+                  id="Email"
+                  name="email" // Update name to match formData
+                  value={formData.email} // Bind value to formData
+                  onChange={handleChange} // Use handleChange
+                  placeholder="Email"
+                  className=" placeholder:pl-2 placeholder:text-black text-black bg-transparent w-full font-bold p-3 outline-none"
+                />
+              </div>
+
+              <div
+                className="border-2 relative w-4/5 h-14 mt-6 shadow-[inset_10px_30px_10px_rgba(255,255,255,0.3),inset_-2px_-5px_10px_rgba(0,0,0,0.4),2px_2px_3px_rgba(255,255,255,1),5px_1px_5px_rgba(255,255,255,5)]
+              hover:shadow-[inset_20px_50px_10px_rgba(0,0,0,0.1),inset_2px_5px_10px_rgba(0,0,0,0.4),15px_15px_10px_rgba(0,0,0,0),15px_10px_15px_rgba(255,255,255,0.1)] rounded-3xl"
+              >
+                {/* <label htmlFor="Password" className=" text-black ">
+                      Password
+                    </label> */}
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="Password"
+                  name="password" // Update name to match formData
+                  value={formData.password} // Bind value to formData
+                  onChange={handleChange} // Use handleChange
+                  placeholder="Password"
+                  className="placeholder:pl-2 placeholder:text-black text-black bg-transparent w-full font-bold p-3 outline-none "
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-7 transform -translate-y-1/2"
+                >
+                  {showPassword ? (
+                    <EyeOffIcon className="h-7 text-gray-600 " />
+                  ) : (
+                    <EyeIcon className="h-7 text-gray-600 " />
+                  )}
+                </button>
+              </div>
+
+              <div className="">
+                <p className="bg-stone-600 bg-opacity-80 text-sm h-6 text-white justify-center items-center dark:text-white mt-8">
+                  By using our services, you agree to our
+                  <a
+                    href="#"
+                    className="text-red-500 underline dark:text-red-400"
+                  >
+                    {" "}
+                    terms and conditions{" "}
+                  </a>
+                  and
+                  <a
+                    href="#"
+                    className="text-red-500 underline dark:text-red-400"
+                  >
+                    {" "}
+                    privacy policy{" "}
+                  </a>
+                  .
+                </p>
+              </div>
+
+              <div className="">
+                <button
+                  type="submit" // Ensure the button type is set to "submit"
+                  className="w-56 shadow-[inset_20px_50px_10px_rgba(0,0,0,0.1),inset_-2px_-5px_10px_rgba(255,255,255,1),15px_15px_10px_rgba(0,0,0,0.5),15px_10px_15px_rgba(0,0,0,0.5)]
+            rounded-3xl mt-6 relative right-48 md:right-0 border border-blue-600 bg-blue-600  py-3 text-sm font-medium text-white transition  hover:text-lg
+                      focus:outline-none focus:ring active:text-blue-500 dark:hover:text-white dark:hover:font-semibold"
+                >
+                  Log In Now
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-      )}
+        <div className="relative left-20 bottom-4 hidden md:flex">
+          <LoginWithGoogle />
+        </div>
+        <p
+          className="font-bold relative right-16 w-40 h-32  hidden md:flex bg-blue-300 bg-opacity-50 justify-center items-center cursor-pointer no-underline text-center text-[0.8em] leading-[1.2em] tracking-[0.1em] transition-all duration-250 rounded-[44%_56%_65%_35%_/_57%_58%_42%_43%] px-4 py-2 hover:bg-cyan-400 hover:bg-opacity-40 hover:scale-105
+       shadow-[inset_10px_10px_10px_rgba(247,127,0,0.05),15px_25px_10px_rgba(247,127,0,0.1),15px_20px_20px_rgba(247,127,0,0.1),inset_-10px_-10px_15px_rgba(225,225,225,0.9)] "
+        >
+          Don't have an account?
+          <a
+            href="/user/signup"
+            className="font-serif font-semibold text-red-500 underline dark:text-red-400 rounded-[49% 51% 52% 48% / 63% 59% 41% 37%] shadow-[inset_10px_10px_10px_rgba(247,127,0,0.05),15px_25px_10px_rgba(247,127,0,0.1),15px_20px_20px_rgba(247,127,0,0.1),
+          inset_-10px_-10px_15px_rgba(255,255,255,0.5)] hover:rounded-e-full"
+          >
+            {" "}
+            Create Now{" "}
+          </a>
+        </p>
+      </div>
+
+      <div className="flex flex-col justify-center items-center md:hidden bg-black bg-opacity-50">
+        <p className="font-bold text-white text-4xl ">Login</p>
+        <form
+          action=""
+          onSubmit={handleSubmit}
+          className="text-black text-center mt-10 mb-16 flex flex-col items-center relative"
+        >
+          <div
+            className="w-full h-14 bg-white bg-opacity-40 shadow-[inset_10px_30px_10px_rgba(255,255,255,0.3),inset_-2px_-5px_10px_rgba(0,0,0,0.4),2px_2px_3px_rgba(255,255,255,1),5px_1px_5px_rgba(255,255,255,5)]
+              hover:shadow-[inset_20px_30px_10px_rgba(0,0,0,0.1),inset_2px_5px_10px_rgba(0,0,0,0.4),15px_15px_10px_rgba(0,0,0,0),15px_10px_15px_rgba(255,255,255,0.1)] rounded-3xl"
+          >
+            <input
+              type="email"
+              id="Email"
+              name="email" // Update name to match formData
+              value={formData.email} // Bind value to formData
+              onChange={handleChange} // Use handleChange
+              placeholder="Email"
+              className=" placeholder:pl-2 placeholder:text-black text-black bg-transparent w-full font-bold p-3 outline-none"
+            />
+          </div>
+
+          <div
+            className="border-2 h-14 mt-6 w-full bg-white bg-opacity-40 shadow-[inset_10px_30px_10px_rgba(255,255,255,0.3),inset_-2px_-5px_10px_rgba(0,0,0,0.4),2px_2px_3px_rgba(255,255,255,1),5px_1px_5px_rgba(255,255,255,5)]
+              hover:shadow-[inset_20px_50px_10px_rgba(0,0,0,0.1),inset_2px_5px_10px_rgba(0,0,0,0.4),15px_15px_10px_rgba(0,0,0,0),15px_10px_15px_rgba(255,255,255,0.1)] rounded-3xl"
+          >
+            <input
+              type={showPassword ? "text" : "password"}
+              id="Password"
+              name="password" // Update name to match formData
+              value={formData.password} // Bind value to formData
+              onChange={handleChange} // Use handleChange
+              placeholder="Password"
+              className="placeholder:pl-2 placeholder:text-black text-black bg-transparent w-full font-bold p-3 outline-none "
+            />
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-24"
+            >
+              {showPassword ? (
+                <EyeOffIcon className="h-7 text-gray-600 " />
+              ) : (
+                <EyeIcon className="h-7 text-gray-600 " />
+              )}
+            </button>
+          </div>
+
+          <div className="">
+            <p className="bg-stone-600 bg-opacity-80 text-sm h-6 text-white justify-center items-center dark:text-white mt-8">
+              By using our services, you agree to our
+              <a href="#" className="text-red-500 underline dark:text-red-400">
+                {" "}
+                terms and conditions{" "}
+              </a>
+              and
+              <a href="#" className="text-red-500 underline dark:text-red-400">
+                {" "}
+                privacy policy{" "}
+              </a>
+              .
+            </p>
+          </div>
+
+          <div className="">
+            <button
+              type="submit" // Ensure the button type is set to "submit"
+              className="w-40 md:w-56 shadow-[inset_20px_50px_10px_rgba(0,0,0,0.1),inset_-2px_-5px_10px_rgba(255,255,255,1),15px_15px_10px_rgba(0,0,0,0.5),15px_10px_15px_rgba(0,0,0,0.5)]
+            rounded-3xl mt-6 relative right-0 md:right-0 border border-blue-600 bg-blue-600  py-3 text-sm font-medium text-white transition  hover:text-lg
+                      focus:outline-none focus:ring active:text-blue-500 dark:hover:text-white dark:hover:font-semibold"
+            >
+              Log In Now
+            </button>
+          </div>
+
+          <p className="font-bold text-white mt-6">
+            Don't have an account?
+            <a
+              href="/user/signup"
+              className="font-serif font-semibold text-red-500 underline dark:text-red-400 rounded-[49% 51% 52% 48% / 63% 59% 41% 37%] shadow-[inset_10px_10px_10px_rgba(247,127,0,0.05),15px_25px_10px_rgba(247,127,0,0.1),15px_20px_20px_rgba(247,127,0,0.1),
+          inset_-10px_-10px_15px_rgba(255,255,255,0.5)] hover:rounded-e-full"
+            >
+              {" "}
+              Create Now{" "}
+            </a>
+          </p>
+
+          <div className="w-1/2 mt-6">
+            <LoginWithGoogle />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
