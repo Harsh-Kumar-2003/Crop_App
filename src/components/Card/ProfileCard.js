@@ -3,8 +3,16 @@ import EditProfileButton from "../forms/EditProfileButton";
 import EditNameButton from "../forms/UpdateName";
 
 export default async function ProfileCard({ profile }) {
-  const { uuid, latitude, longitude, location, farmSize, soilType, updatedAt } =
-    profile;
+  const {
+    uuid,
+    latitude,
+    longitude,
+    location,
+    farmSize,
+    soilType,
+    agroClimaticZone,
+    updatedAt,
+  } = profile;
 
   let userName;
 
@@ -97,6 +105,16 @@ export default async function ProfileCard({ profile }) {
             <h2 className="text-sm text-gray-600">Soil Type</h2>
             <p className="text-lg font-semibold text-gray-900">
               {soilType.charAt(0).toUpperCase() + soilType.slice(1)}
+            </p>
+          </div>
+        </div>
+        {/* Agro-Climatic Zone */}
+        <div className="bg-white p-4 rounded-lg shadow-md flex items-center">
+          <Layers className="text-green-600 w-6 h-6 mr-4" />
+          <div>
+            <h2 className="text-sm text-gray-600">Agro-Climatic Zones</h2>
+            <p className="text-lg font-semibold text-gray-900">
+              {agroClimaticZone}
             </p>
           </div>
         </div>

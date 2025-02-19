@@ -17,6 +17,8 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [showModal, setShowModal] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,6 +26,26 @@ export default function Login() {
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const handleResetPassword = async (e) => {
+    console.log("Resetting password...");
+    try {
+      // Send email to user with reset link
+      const response = await fetch(`/api/reset-password?email=${resetEmail}`, {
+        method: "POST",
+      });
+      if (response.ok) {
+        console.log("Password reset email sent!");
+      }
+      const data = await response.json();
+      console.log(data);
+      alert("Password reset email sent!");
+      setShowModal(false);
+    } catch (error) {
+      console.error("Error sending reset email:", error);
+    }
+    //e.preventDefault();
   };
 
   const handleSubmit = async (e) => {
@@ -82,13 +104,6 @@ export default function Login() {
             alt="logo"
             src="/fieldmaven1.png"
           />
-          {/* <aside className="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
-            <img
-              alt=""
-              src="/signup_image.jpeg"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          </aside> */}
           <p
             className="bg-white opacity-20 text-black text-4xl font-semibold w-72 h-12 rounded-lg relative left-1/3 mx-28 text-center"
             style={{
@@ -108,23 +123,6 @@ export default function Login() {
             }}
           >
             <div className="max-w-xl lg:max-w-3xl">
-              {/* <h1 className="mt-6 text-2xl font-bold text-yellow-300 sm:text-3xl md:text-4xl ">
-                Welcome Back to FieldMaven
-              </h1>
-
-              <p
-                className="mt-4 text-yellow-400 text-lg font-serif italic"
-                style={{
-                  fontFamily: "'Dancing Script', cursive",
-                  letterSpacing: "0.5px",
-                  textShadow: "0.5px 0.5px 2px rgba(0, 0, 0, 0.1)",
-                }}
-              >
-                "Welcome back to FieldMaven – Empowering Your Farming Journey.
-                Log in to access personalized insights, manage your fields, and
-                continue paving the way to sustainable success."
-              </p> */}
-              {/* <LoginForm /> */}
               <div>
                 <form
                   onSubmit={handleSubmit}
@@ -140,9 +138,9 @@ export default function Login() {
                     <input
                       type="email"
                       id="Email"
-                      name="email" // Update name to match formData
-                      value={formData.email} // Bind value to formData
-                      onChange={handleChange} // Use handleChange
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
                       className="mt-1 w-full rounded-md border-gray-300 bg-white bg-opacity-40 text-sm text-black shadow-sm dark:border-gray-100 dark:bg-gray-800 dark:text-gray-200 p-2"
                     />
                   </div>
@@ -157,9 +155,9 @@ export default function Login() {
                     <input
                       type={showPassword ? "text" : "password"}
                       id="Password"
-                      name="password" // Update name to match formData
-                      value={formData.password} // Bind value to formData
-                      onChange={handleChange} // Use handleChange
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
                       className="mt-1 w-full rounded-md border-gray-300 bg-white bg-opacity-40 text-sm text-black shadow-sm dark:border-gray-100 dark:bg-gray-800 dark:text-gray-200 p-2"
                     />
                     <button
@@ -199,7 +197,7 @@ export default function Login() {
 
                   <div className="w-80 mx-72">
                     <button
-                      type="submit" // Ensure the button type is set to "submit"
+                      type="submit"
                       className="my-6  inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500 dark:hover:bg-blue-700 dark:hover:text-white"
                     >
                       Log In Now
@@ -219,11 +217,52 @@ export default function Login() {
                 </form>
               </div>
               <LoginWithGoogle />
+              <button
+                className="mt-4 text-sm text-blue-500 underline"
+                onClick={() => setShowModal(true)}
+              >
+                Forgot Password?
+              </button>
             </div>
           </main>
         </div>
       </section>
-         
+
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h2 className="text-xl font-semibold mb-4">Reset Password</h2>
+            <form onSubmit={handleResetPassword}>
+              <label
+                htmlFor="resetEmail"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email
+              </label>
+              <input
+                type="email"
+                id="resetEmail"
+                name="resetEmail"
+                value={resetEmail}
+                onChange={(e) => setResetEmail(e.target.value)}
+                className="mt-1 w-full rounded-md border-gray-300 shadow-sm p-2"
+              />
+              <button
+                type="submit"
+                className="mt-4 w-full bg-blue-600 text-white py-2 rounded-md"
+              >
+                Reset Password
+              </button>
+            </form>
+            <button
+              className="mt-4 w-full bg-gray-600 text-white py-2 rounded-md"
+              onClick={() => setShowModal(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

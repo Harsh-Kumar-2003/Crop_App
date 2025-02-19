@@ -1,0 +1,106 @@
+{
+  "crops": [
+    {
+      "name": "Wheat",
+      "type": "Cereal",
+      "season": "Rabi",
+      "optimal_temperature": "10-25°C",
+      "rainfall_requirement": "50-100 cm",
+      "soil_type": ["Loamy", "Clayey"],
+      "pH_range": "6.0-7.5",
+      "sowing_time": "October-November",
+      "harvest_time": "March-April",
+      "growth_duration": "110-150 days",
+      "suitable_agro_climatic_zones": [
+        "Indo-Gangetic Plains",
+        "Western Plateau and Hills",
+        "Trans-Gangetic Plains"
+      ],
+      "major_producing_states": [
+        "Uttar Pradesh",
+        "Punjab",
+        "Haryana",
+        "Madhya Pradesh",
+        "Rajasthan"
+      ],
+      "yield_per_hectare": "3-4 tons",
+      "common_pests": ["Aphids", "Rust Fungus"],
+      "common_diseases": ["Powdery Mildew", "Leaf Blight"],
+      "fertilizer_recommendation": {
+        "NPK_ratio": "120:60:40",
+        "organic_fertilizer": "Compost, Farmyard Manure"
+      },
+      "water_management": "Requires irrigation in dry regions",
+      "market_value": "₹20-25 per kg",
+      "uses": ["Flour", "Bread", "Pasta"]
+    },
+    {
+      "name": "Wheat",
+      "type": "Cereal",
+      "season": "Rabi",
+      "optimal_temperature": "10-25°C",
+      "rainfall_requirement": "50-100 cm",
+      "soil_type": ["Loamy", "Clayey"],
+      "pH_range": "6.0-7.5",
+      "sowing_time": "October-November",
+      "harvest_time": "March-April",
+      "growth_duration": "110-150 days",
+      "suitable_agro_climatic_zones": [
+        "Indo-Gangetic Plains",
+        "Western Plateau and Hills",
+        "Trans-Gangetic Plains"
+      ],
+      "major_producing_states": [
+        "Uttar Pradesh",
+        "Punjab",
+        "Haryana",
+        "Madhya Pradesh",
+        "Rajasthan"
+      ],
+      "yield_per_hectare": "3-4 tons",
+      "common_pests": ["Aphids", "Rust Fungus"],
+      "common_diseases": ["Powdery Mildew", "Leaf Blight"],
+      "fertilizer_recommendation": {
+        "NPK_ratio": "120:60:40",
+        "organic_fertilizer": "Compost, Farmyard Manure"
+      },
+      "water_management": "Requires irrigation in dry regions",
+      "market_value": "₹20-25 per kg",
+      "uses": ["Flour", "Bread", "Pasta"]
+    },
+    {
+      "name": "Tomato",
+      "type": "Vegetable",
+      "season": "All Seasons (Variety dependent)",
+      "optimal_temperature": "20-30°C",
+      "rainfall_requirement": "50-80 cm",
+      "soil_type": ["Loamy", "Well-Drained"],
+      "pH_range": "6.2-6.8",
+      "sowing_time": "Varies (Kharif: June-July, Rabi: October-November)",
+      "harvest_time": "60-80 days after sowing",
+      "growth_duration": "3-4 months",
+      "suitable_agro_climatic_zones": [
+        "Western Plateau and Hills",
+        "Southern Plateau and Hills",
+        "Eastern Plateau and Hills"
+      ],
+      "major_producing_states": [
+        "Maharashtra",
+        "Karnataka",
+        "Andhra Pradesh",
+        "Odisha",
+        "West Bengal"
+      ],
+      "yield_per_hectare": "25-35 tons",
+      "common_pests": ["Whiteflies", "Aphids"],
+      "common_diseases": ["Late Blight", "Bacterial Wilt"],
+      "fertilizer_recommendation": {
+        "NPK_ratio": "100:50:50",
+        "organic_fertilizer": "Vermicompost, Bone Meal"
+      },
+      "water_management": "Regular irrigation needed",
+      "market_value": "₹15-30 per kg",
+      "uses": ["Salads", "Sauces", "Ketchup"]
+    }
+  ]
+}
