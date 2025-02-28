@@ -31,14 +31,16 @@ export default async function RoutesLayout({ children, params }) {
 
   return (
     <>
-      <main className="flex flex-col bg-green-900">
+      <main className="flex flex-col bg-white-900">
         {/* Sidebar is persistent and overlays content */}
         <Sidebar user={user} />
 
-        <nav className="bg-blue-200 pl-16 pr-4 flex flex-row items-center relative">
+        <nav className="bg-stone-500 pl-16 pr-4 flex flex-row items-center relative">
           <img className="w-16" src="/fieldmaven1.png" alt="Fieldmaven Logo" />
           <span className="text-2xl font-bold px-4">Hello, {userName}</span>
-          <LogoutButton className="absolute right-4" />
+          <div className="w-9/12 flex justify-end ">
+            <LogoutButton />
+          </div>
         </nav>
         <div>{children}</div>
       </main>

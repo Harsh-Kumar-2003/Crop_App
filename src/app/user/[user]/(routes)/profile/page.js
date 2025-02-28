@@ -2,6 +2,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import ProfileForm from "@/components/forms/ProfileForm";
 import ProfileCard from "@/components/Card/ProfileCard";
+import bg from "@/public/images/user2.jpg";
 
 export default async function Profile({ params }) {
   //const { user } = params;
@@ -38,7 +39,15 @@ export default async function Profile({ params }) {
   const profile = await profileData.json();
   console.log(profile);
   return (
-    <div>
+    <div
+      className="relative bottom-8 "
+      style={{
+        backgroundImage: `url(${bg.src})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }}
+    >
       {Object.keys(profile).length === 0 ? (
         <ProfileForm uuid={uuid} />
       ) : (

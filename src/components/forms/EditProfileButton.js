@@ -77,10 +77,10 @@ export default function EditProfileButton({ profile }) {
     <>
       {/* Edit Button */}
       <button
-        className="bg-white text-green-600 px-3 py-1 rounded-lg shadow-md flex items-center"
+        className="bg-stone-500 text-white font-bold px-3 w-56 py-1 text-xl rounded-lg shadow-md flex justify-center"
         onClick={() => setOpen(true)}
       >
-        <Pencil className="w-4 h-4 mr-2" />
+        {/* <Pencil className="w-4 h-4 mr-2" /> */}
         Edit
       </button>
 

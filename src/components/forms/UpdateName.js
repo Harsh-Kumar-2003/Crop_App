@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Pencil } from "lucide-react";
+// import { Pencil } from "lucide-react";
 
 export default function EditNameButton({ uuid }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,10 +41,10 @@ export default function EditNameButton({ uuid }) {
       {/* Edit Button */}
       <button
         onClick={() => setIsOpen(true)}
-        className="flex px-2 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+        className="w-full flex items-center justify-center px-2 py-2 bg-transparent text-black rounded-md hover:text-xl"
       >
         Edit Name
-        <Pencil size={16} className="mr-1" />
+        {/* <Pencil size={16} className="mr-1 ml-1 mt-1" /> */}
       </button>
 
       {/* Modal */}
