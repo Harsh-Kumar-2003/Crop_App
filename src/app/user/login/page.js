@@ -127,7 +127,7 @@ export default function Login() {
                   value={formData.email} // Bind value to formData
                   onChange={handleChange} // Use handleChange
                   placeholder="Email"
-                  className=" placeholder:pl-2 placeholder:text-black text-black bg-transparent w-full font-bold p-3 outline-none"
+                  className=" placeholder:pl-2 placeholder:text-black rounded-3xl h-14 text-black bg-transparent w-full font-bold p-3 outline-none"
                 />
               </div>
 
@@ -145,7 +145,7 @@ export default function Login() {
                   value={formData.password} // Bind value to formData
                   onChange={handleChange} // Use handleChange
                   placeholder="Password"
-                  className="placeholder:pl-2 placeholder:text-black text-black bg-transparent w-full font-bold p-3 outline-none "
+                  className="placeholder:pl-2 placeholder:text-black text-black rounded-3xl h-14  bg-transparent w-full font-bold p-3 outline-none "
                 />
                 <button
                   type="button"
