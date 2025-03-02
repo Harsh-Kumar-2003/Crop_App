@@ -53,17 +53,17 @@ export default function Page() {
               Home
             </a>
             <a
-              href="#services"
+              href="/services"
               className=" hover:text-green-500 hover:underline"
             >
               Services
             </a>
 
-            <a href="#schemes" className="hover:text-green-500 hover:underline">
+            <a href="/schemes" className="hover:text-green-500 hover:underline">
               Latest Schemes
             </a>
             <a
-              href="#contact"
+              href="/contact"
               className="hover:text-green-500 hover:underline "
             >
               Contact

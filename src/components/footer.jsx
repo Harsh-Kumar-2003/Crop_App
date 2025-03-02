@@ -23,8 +23,8 @@ export default function Footer() {
                 </a>
               </li>
               <li className="mb-2">
-                <a href="/#about" className="hover:underline">
-                  About Us
+                <a href="/schemes" className="hover:underline">
+                  Latest Schemes
                 </a>
               </li>
               <li className="mb-2">

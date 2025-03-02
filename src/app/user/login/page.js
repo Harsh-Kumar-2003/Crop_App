@@ -164,7 +164,7 @@ export default function Login() {
                 <p className="bg-stone-600 bg-opacity-80 text-sm h-6 text-white justify-center items-center dark:text-white mt-8">
                   By using our services, you agree to our
                   <a
-                    href="#"
+                    href="/t&c"
                     className="text-red-500 underline dark:text-red-400"
                   >
                     {" "}
@@ -172,7 +172,7 @@ export default function Login() {
                   </a>
                   and
                   <a
-                    href="#"
+                    href="/privacy_policy"
                     className="text-red-500 underline dark:text-red-400"
                   >
                     {" "}
@@ -198,20 +198,21 @@ export default function Login() {
         <div className="relative left-20 bottom-4 hidden md:flex">
           <LoginWithGoogle />
         </div>
+        <a href="/user/signup">
         <p
           className="font-bold relative right-16 w-40 h-32  hidden md:flex bg-blue-300 bg-opacity-50 justify-center items-center cursor-pointer no-underline text-center text-[0.8em] leading-[1.2em] tracking-[0.1em] transition-all duration-250 rounded-[44%_56%_65%_35%_/_57%_58%_42%_43%] px-4 py-2 hover:bg-cyan-400 hover:bg-opacity-40 hover:scale-105
        shadow-[inset_10px_10px_10px_rgba(247,127,0,0.05),15px_25px_10px_rgba(247,127,0,0.1),15px_20px_20px_rgba(247,127,0,0.1),inset_-10px_-10px_15px_rgba(225,225,225,0.9)] "
         >
           Don't have an account?
-          <a
-            href="/user/signup"
+          <span
             className="font-serif font-semibold text-red-500 underline dark:text-red-400 rounded-[49% 51% 52% 48% / 63% 59% 41% 37%] shadow-[inset_10px_10px_10px_rgba(247,127,0,0.05),15px_25px_10px_rgba(247,127,0,0.1),15px_20px_20px_rgba(247,127,0,0.1),
           inset_-10px_-10px_15px_rgba(255,255,255,0.5)] hover:rounded-e-full"
           >
             {" "}
             Create Now{" "}
-          </a>
+          </span>
         </p>
+        </a>
       </div>
 
       <div className="flex flex-col justify-center items-center md:hidden bg-black bg-opacity-50">
