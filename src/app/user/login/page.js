@@ -108,7 +108,7 @@ export default function Login() {
         ></Image>
       </aside>
       <div className="flex justify-center items-center">
-        <div className=" mt-2 mb-32 relative left-52 h-[480px] hidden md:flex justify-center items-center rounded-[62%_38%_24%_76%_/_59%_60%_40%_41%] shadow-[inset_20px_20px_20px_rgba(0,0,0,0.4),25px_35px_20px_rgba(0,0,0,0.09),25px_30px_30px_rgba(0,0,0,0.2),inset_-20px_-20px_25px_rgba(255,255,255,0.9)] transition-all duration-300 hover:rounded-full before:content-[''] before:absolute before:top-[50px] before:left-[85px] before:w-[35px] before:h-[35px] before:rounded-full before:bg-gray-200 before:opacity-90 after:content[' '] after:absolute after:top-[85px] after:left-[110px] after:width-[15px] after:height-[15px] after:rounded-full after:bg-slate-400 after:opacity-90">
+        <div className="w-[700px] h-[500px] mt-2 mb-32 relative left-52 hidden md:flex justify-center items-center rounded-[62%_38%_24%_76%_/_59%_60%_40%_41%] shadow-[inset_5px_2px_20px_rgba(0,0,0,0.4),25px_35px_20px_rgba(0,0,0,0.09),25px_30px_30px_rgba(0,0,0,0.2),inset_-20px_-20px_25px_rgba(255,255,255,0.9)] transition-all duration-300 hover:rounded-full before:content-[''] before:absolute before:top-[50px] before:left-[85px] before:w-[35px] before:h-[35px] before:rounded-full before:bg-gray-200 before:opacity-90 after:content[' '] after:absolute after:top-[85px] after:left-[110px] after:width-[15px] after:height-[15px] after:rounded-full after:bg-slate-400 after:opacity-90">
           <div className="relative flex justify-center items-center flex-col text-center p-10 gap-4">
             <p className="font-bold text-black text-4xl mb-6">Login</p>
             <form
@@ -160,7 +160,7 @@ export default function Login() {
                 </button>
               </div>
 
-              <div className="">
+              <div className="mr-6">
                 <p className="bg-stone-600 bg-opacity-80 text-sm h-6 text-white justify-center items-center dark:text-white mt-8">
                   By using our services, you agree to our
                   <a
@@ -173,7 +173,7 @@ export default function Login() {
                   and
                   <a
                     href="/privacy_policy"
-                    className="text-red-500 underline dark:text-red-400"
+                    className=" text-red-500 underline dark:text-red-400 "
                   >
                     {" "}
                     privacy policy{" "}
@@ -199,19 +199,19 @@ export default function Login() {
           <LoginWithGoogle />
         </div>
         <a href="/user/signup">
-        <p
-          className="font-bold relative right-16 w-40 h-32  hidden md:flex bg-blue-300 bg-opacity-50 justify-center items-center cursor-pointer no-underline text-center text-[0.8em] leading-[1.2em] tracking-[0.1em] transition-all duration-250 rounded-[44%_56%_65%_35%_/_57%_58%_42%_43%] px-4 py-2 hover:bg-cyan-400 hover:bg-opacity-40 hover:scale-105
+          <p
+            className="font-bold relative right-16 w-40 h-32  hidden md:flex bg-blue-300 bg-opacity-50 justify-center items-center cursor-pointer no-underline text-center text-[0.8em] leading-[1.2em] tracking-[0.1em] transition-all duration-250 rounded-[44%_56%_65%_35%_/_57%_58%_42%_43%] px-4 py-2 hover:bg-cyan-400 hover:bg-opacity-40 hover:scale-105
        shadow-[inset_10px_10px_10px_rgba(247,127,0,0.05),15px_25px_10px_rgba(247,127,0,0.1),15px_20px_20px_rgba(247,127,0,0.1),inset_-10px_-10px_15px_rgba(225,225,225,0.9)] "
-        >
-          Don't have an account?
-          <span
-            className="font-serif font-semibold text-red-500 underline dark:text-red-400 rounded-[49% 51% 52% 48% / 63% 59% 41% 37%] shadow-[inset_10px_10px_10px_rgba(247,127,0,0.05),15px_25px_10px_rgba(247,127,0,0.1),15px_20px_20px_rgba(247,127,0,0.1),
-          inset_-10px_-10px_15px_rgba(255,255,255,0.5)] hover:rounded-e-full"
           >
-            {" "}
-            Create Now{" "}
-          </span>
-        </p>
+            Don't have an account?
+            <span
+              className="font-serif font-semibold text-red-500 underline dark:text-red-400 rounded-[49% 51% 52% 48% / 63% 59% 41% 37%] shadow-[inset_10px_10px_10px_rgba(247,127,0,0.05),15px_25px_10px_rgba(247,127,0,0.1),15px_20px_20px_rgba(247,127,0,0.1),
+          inset_-10px_-10px_15px_rgba(255,255,255,0.5)] hover:rounded-e-full"
+            >
+              {" "}
+              Create Now{" "}
+            </span>
+          </p>
         </a>
       </div>
 
