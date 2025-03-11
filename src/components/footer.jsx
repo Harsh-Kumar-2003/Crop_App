@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Footer() {
   return (
     <footer className="bg-zinc-200 text-black py-14">
@@ -9,9 +7,7 @@ export default function Footer() {
             <h5 className="text-lg font-bold mb-4">FieldMaven</h5>
             <p className="text-sm" style={{ paddingRight: 30 }}>
               {" "}
-              Your health and well-being are our top priority. We provide
-              trusted medical information, resources, and support to help you
-              make informed decisions about your health.
+              FieldMaven is an AI-powered tool that helps farmers detect plant diseases instantly by analyzing uploaded images. Using advanced machine learning models, it provides quick and accurate disease predictions along with treatment suggestions. With a simple interface, Crop App makes modern farming smarter and more efficient. 
             </p>
           </div>
           <div className="w-full md:w-1/3 mb-6 md:mb-0">

@@ -74,6 +74,7 @@ export default function Login() {
       }}
     >
       <aside className="pl-3 bg-black bg-opacity-50 md:bg-transparent relative block h-16  lg:col-span-5 lg:h-full xl:col-span-6">
+        <a href="/">
         <Image
           src="/fieldmaven1.png"
           alt="A description of the image"
@@ -81,6 +82,7 @@ export default function Login() {
           height={70}
           className="rounded-2xl "
         ></Image>
+        </a>
       </aside>
       <div className="flex justify-center items-center">
         <div className="w-[700px] h-[500px] mt-2 mb-32 relative left-52 hidden md:flex justify-center items-center rounded-[62%_38%_24%_76%_/_59%_60%_40%_41%] shadow-[inset_5px_2px_20px_rgba(0,0,0,0.4),25px_35px_20px_rgba(0,0,0,0.09),25px_30px_30px_rgba(0,0,0,0.2),inset_-20px_-20px_25px_rgba(255,255,255,0.9)] transition-all duration-300 hover:rounded-full before:content-[''] before:absolute before:top-[50px] before:left-[85px] before:w-[35px] before:h-[35px] before:rounded-full before:bg-gray-200 before:opacity-90 after:content[' '] after:absolute after:top-[85px] after:left-[110px] after:width-[15px] after:height-[15px] after:rounded-full after:bg-slate-400 after:opacity-90">
@@ -156,17 +158,14 @@ export default function Login() {
                   .
                 </p>
               </div>
-
-              <div className="">
-                <button
-                  type="submit" // Ensure the button type is set to "submit"
-                  className="w-56 shadow-[inset_20px_50px_10px_rgba(0,0,0,0.1),inset_-2px_-5px_10px_rgba(255,255,255,1),15px_15px_10px_rgba(0,0,0,0.5),15px_10px_15px_rgba(0,0,0,0.5)]
+              <button
+                type="submit" // Ensure the button type is set to "submit"
+                className="w-56 shadow-[inset_20px_50px_10px_rgba(0,0,0,0.1),inset_-2px_-5px_10px_rgba(255,255,255,1),15px_15px_10px_rgba(0,0,0,0.5),15px_10px_15px_rgba(0,0,0,0.5)]
             rounded-3xl mt-6 relative right-48 md:right-0 border border-blue-600 bg-blue-600  py-3 text-sm font-medium text-white transition  hover:text-lg
-                      focus:outline-none focus:ring active:text-blue-500 dark:hover:text-white dark:hover:font-semibold"
-                >
-                  Log In Now
-                </button>
-              </div>
+                    focus:outline-none focus:ring active:text-blue-500 dark:hover:text-white dark:hover:font-semibold"
+              >
+                Log In Now
+              </button>
             </form>
           </div>
         </div>

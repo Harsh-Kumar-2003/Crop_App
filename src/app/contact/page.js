@@ -5,6 +5,7 @@ import NavBar from "@/components/navbar.jsx"
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -12,6 +13,7 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSending(true);
 
     const response = await fetch("/api/contact", { // Updated API route path
       method: "POST",
@@ -29,6 +31,7 @@ export default function Contact() {
     } else {
       alert("Error: " + data.error);
     }
+    setSending(false);
   };
 
   return (
@@ -91,7 +94,7 @@ export default function Contact() {
                 type="submit"
                 className="w-full bg-gradient-to-r from-blue-600 to-green-500 text-white p-4 rounded-lg hover:from-blue-700 hover:to-green-600 transition duration-300 shadow-lg"
               >
-                Send Message
+                { sending? "Sending" : "Send Message"}
               </button>
             </form>
           </div>

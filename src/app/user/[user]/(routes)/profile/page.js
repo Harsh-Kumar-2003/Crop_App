@@ -39,20 +39,20 @@ export default async function Profile({ params }) {
   const profile = await profileData.json();
   console.log(profile);
   return (
-    <div
-      className="relative bottom-8 "
-      style={{
-        backgroundImage: `url(${bg.src})`,
-        backgroundSize: "cover",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-      }}
-    >
-      {Object.keys(profile).length === 0 ? (
-        <ProfileForm uuid={uuid} />
-      ) : (
-        <ProfileCard profile={profile} />
-      )}
-    </div>
+      <div
+        className="relative bottom-8 "
+        style={{
+          backgroundImage: `url(${bg.src})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }}
+      >
+        {Object.keys(profile).length === 0 ? (
+          <ProfileForm uuid={uuid} />
+        ) : (
+          <ProfileCard profile={profile} />
+        )}
+        </div>
   );
 }

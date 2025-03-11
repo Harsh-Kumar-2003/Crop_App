@@ -1,5 +1,6 @@
 "use client";
-import React, { useState } from "react";
+
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import AppSidebar from "./AppSidebar";
@@ -8,8 +9,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import LogoutButton from "./LogOutButton";
 
-const Sidebar = ({ user }) => {
+const Sidebar = ({ user , userName}) => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isSpecificScreenSize, setIsSpecificScreenSize] = useState(false);
+  
+    useEffect(() => {
+      const updateScreenSize = () => {
+        setIsSpecificScreenSize(
+          window.innerWidth <= 1043 && window.innerHeight <= 1083
+        );
+      };
+  
+      updateScreenSize(); // Initial check
+      window.addEventListener("resize", updateScreenSize);
+  
+      return () => window.removeEventListener("resize", updateScreenSize);
+    }, []);
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -18,12 +33,23 @@ const Sidebar = ({ user }) => {
   return (
     <div>
       {/* Hamburger Button */}
-      <button
-        onClick={toggleNav}
-        className="fixed top-4 left-4 p-2 rounded-md bg-green-500 shadow inline-flex items-center gap-2 cursor-pointer z-30"
-      >
-        <FontAwesomeIcon icon={faBars} />
-      </button>
+      <nav className="bg-gray-200 rounded shadow-md p-4 flex justify-between items-center">
+        <div className="flex">
+          <button
+            onClick={toggleNav}
+            className="p-2 rounded-md bg-green-500 shadow inline-flex items-center gap-2 cursor-pointer z-30"
+          >
+            <FontAwesomeIcon icon={faBars} />
+          </button>
+          <div className="pl-10 flex items-center">
+            <img src="/fieldmaven1.png" alt="Logo" className="h-12 w-12 mr-2" />
+            <span className="text-xl font-bold text-green-700">FieldRaven</span>
+          </div>
+        </div>
+        {!isSpecificScreenSize&&(<div className="bg-green-100 text-green-700 font-medium px-4 py-2 rounded-full border border-green-500 shadow-sm">
+          Hello, {userName}
+        </div>)}
+      </nav>
 
       {/* Overlay */}
       {isNavOpen && (
@@ -51,6 +77,9 @@ const Sidebar = ({ user }) => {
               alt="avatar"
             />
           </div>
+          {isSpecificScreenSize&&(<div className="bg-green-100 text-green-700 font-medium px-4 py-2 rounded-full border border-green-500 shadow-sm">
+          Hello, {userName}
+          </div>)}
           <div className="mb-4">
             <Link
               href="/"

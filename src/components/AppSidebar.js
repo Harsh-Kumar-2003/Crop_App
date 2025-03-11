@@ -40,6 +40,16 @@ text-black"
       </Link>
 
       <Link
+        href={`/user/${user}/diseasePrediction`}
+        className={
+          "flex gap-4 p-2 " +
+          (path === `/user/${user}/weatherUpdates` ? "text-sky-500" : "")
+        }
+      >
+        <span>Disease Prediction</span>
+      </Link>
+
+      <Link
         href={`/user/${user}/weatherUpdates`}
         className={
           "flex gap-4 p-2 " +

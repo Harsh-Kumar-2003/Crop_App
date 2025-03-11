@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
 import { signIn } from "next-auth/react";
-import ProfileForm from "./ProfileForm";
 
 const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState(false);

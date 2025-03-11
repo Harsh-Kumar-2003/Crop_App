@@ -33,113 +33,98 @@ export default async function ProfileCard({ profile }) {
   }
 
   return (
-    <div className="bg-transparent p-4 rounded-2xl shadow-lg  my-8">
-      <h1 className="text-black text-2xl font-bold mb-6">Farmer Profile</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
-        <div className="left_part border-r-2 w-3/4 border-black">
-          {/* Name */}
-          <div className="p-4 rounded-lg shadow-md items-center">
-            <UserRound className=" text-green-600 h-24 w-full flex items-center justify-center" />
-            <div>
-              {/* <h2 className="text-sm text-gray-600">Name</h2> */}
-              <p className="text-xl font-semibold text-gray-900 text-center">
-                {userName}
-              </p>
-            </div>
-            {/* Edit Name Button */}
-            <div>
-              <EditNameButton className="" uuid={uuid} />
-            </div>
-          </div>
+    <div className="bg-white bg-opacity-80 p-6 rounded-2xl shadow-xl my-8 max-w-5xl mx-auto">
+  <h1 className="text-green-700 text-3xl font-bold text-center mb-6">Farmer Profile</h1>
+  
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    {/* Left Side - User Info */}
+    <div className="p-6 rounded-lg shadow-md border border-gray-200 bg-white">
+      <div className="flex flex-col items-center">
+        {/* User Icon */}
+        <UserRound className="text-green-600 h-24 w-24 mb-4" />
+        
+        {/* User Name */}
+        <p className="text-2xl font-semibold text-gray-900 text-center">{userName}</p>
+        
+        {/* Edit Name Button */}
+        <EditNameButton className="mt-2" uuid={uuid} />
+      </div>
 
-          {/* Location */}
-          <div className="w-full flex text-center justify-center">
-            <div className="bg-stone-500  mt-6  p-2 pl-14 rounded-lg shadow-md w-64 flex items-center">
-              <MapPin className="text-white w-6 h-6 mr-4" />
-              <div>
-                <h2 className="text-sm  text-white">Location</h2>
-                <p className="text-lg font-semibold text-white">
-                  {location || "N/A"}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-full flex text-center justify-center">
-            <div className="flex-col mt-6">
-              {/* Edit Profile Button */}
-              <div className=" ">
-                <EditProfileButton profile={profile} className="" />
-              </div>
-              <div className="text-center mt-8">{updatedAt}</div>
-            </div>
-          </div>
-        </div>
-
-        <div className="right_part text-white relative right-36">
-          <h1 className="text-2xl font-semibold text-black">
-            Basic Informations
-          </h1>
-          {/* Latitude */}
-          <div className="border-2 border-stone-500 mt-4 p-4 rounded-lg shadow-[inset_20px_20px_20px_rgba(0,0,0,0.4),25px_35px_20px_rgba(0,0,0,0.09),25px_30px_30px_rgba(0,0,0,0.2),inset_-20px_-20px_25px_rgba(255,255,255,0.9)] flex items-center">
-            <Globe className="text-green-600 w-6 h-6 mr-4" />
-            <div>
-              <h2 className="text-sm text-gray-600">Latitude</h2>
-              <p className="text-lg font-semibold text-gray-900">
-                {latitude && !isNaN(latitude)
-                  ? Number(latitude).toFixed(3)
-                  : "N/A"}
-              </p>
-            </div>
-          </div>
-
-          {/* Longitude */}
-          <div className="border-2 border-stone-500 mt-4 p-4 rounded-lg shadow-[inset_20px_20px_20px_rgba(0,0,0,0.4),25px_35px_20px_rgba(0,0,0,0.09),25px_30px_30px_rgba(0,0,0,0.2),inset_-20px_-20px_25px_rgba(255,255,255,0.9)] flex items-center">
-            <Globe className="text-green-600 w-6 h-6 mr-4" />
-            <div>
-              <h2 className="text-sm text-gray-600">Longitude</h2>
-              <p className="text-lg font-semibold text-gray-900">
-                {longitude && !isNaN(longitude)
-                  ? Number(longitude).toFixed(3)
-                  : "N/A"}
-              </p>
-            </div>
-          </div>
-
-          {/* Farm Size */}
-          <div className="border-2 border-stone-500 mt-4 p-4 rounded-lg shadow-[inset_20px_20px_20px_rgba(0,0,0,0.4),25px_35px_20px_rgba(0,0,0,0.09),25px_30px_30px_rgba(0,0,0,0.2),inset_-20px_-20px_25px_rgba(255,255,255,0.9)] flex items-center">
-            <Layers className="text-green-600 w-6 h-6 mr-4" />
-            <div>
-              <h2 className="text-sm text-gray-600">Farm Size</h2>
-              <p className="text-lg font-semibold text-gray-900">
-                {farmSize} acres
-              </p>
-            </div>
-          </div>
-
-          {/* Soil Type */}
-          <div className="border-2 border-stone-500 mt-4 p-4 rounded-lg shadow-[inset_20px_20px_20px_rgba(0,0,0,0.4),25px_35px_20px_rgba(0,0,0,0.09),25px_30px_30px_rgba(0,0,0,0.2),inset_-20px_-20px_25px_rgba(255,255,255,0.9)] flex items-center">
-            <Droplet className="text-green-600 w-6 h-6 mr-4" />
-            <div>
-              <h2 className="text-sm text-gray-600">Soil Type</h2>
-              <p className="text-lg font-semibold text-gray-900">
-                {soilType.charAt(0).toUpperCase() + soilType.slice(1)}
-              </p>
-            </div>
-          </div>
-
-          {/* Agro-Climatic Zone */}
-          <div className="border-2 border-stone-500 mt-4 p-4 mb-8 rounded-lg shadow-[inset_20px_20px_20px_rgba(0,0,0,0.4),25px_35px_20px_rgba(0,0,0,0.09),25px_30px_30px_rgba(0,0,0,0.2),inset_-20px_-20px_25px_rgba(255,255,255,0.9)] flex items-center">
-            <Layers className="text-green-600 w-6 h-6 mr-4" />
-            <div>
-              <h2 className="text-sm text-gray-600">Agro-Climatic Zones</h2>
-              <p className="text-lg font-semibold text-gray-900">
-                {agroClimaticZone}
-              </p>
-            </div>
+      {/* Location */}
+      <div className="mt-6 flex justify-center">
+        <div className="bg-green-600 text-white p-3 rounded-lg shadow-lg flex items-center w-64">
+          <MapPin className="w-6 h-6 mr-3" />
+          <div>
+            <h2 className="text-sm">Location</h2>
+            <p className="text-lg font-semibold">{location || "N/A"}</p>
           </div>
         </div>
       </div>
+
+      {/* Edit Profile Button & Last Updated */}
+      <div className="mt-6 flex flex-col items-center">
+        <EditProfileButton profile={profile} />
+        <p className="text-sm text-gray-500 mt-4">{updatedAt}</p>
+      </div>
     </div>
+
+    {/* Right Side - Profile Details */}
+    <div className="p-6 rounded-lg shadow-md border border-gray-200 bg-white">
+      <h1 className="text-2xl font-semibold text-gray-800 mb-4">Basic Information</h1>
+      
+      {/* Latitude */}
+      <div className="flex items-center border rounded-lg p-4 shadow-sm bg-gray-50 mb-4">
+        <Globe className="text-green-600 w-6 h-6 mr-4" />
+        <div>
+          <h2 className="text-sm text-gray-500">Latitude</h2>
+          <p className="text-lg font-semibold text-gray-900">{latitude && !isNaN(latitude)
+                  ? Number(latitude).toFixed(3)
+                  : "N/A"}</p>
+        </div>
+      </div>
+
+      {/* Longitude */}
+      <div className="flex items-center border rounded-lg p-4 shadow-sm bg-gray-50 mb-4">
+        <Globe className="text-green-600 w-6 h-6 mr-4" />
+        <div>
+          <h2 className="text-sm text-gray-500">Longitude</h2>
+          <p className="text-lg font-semibold text-gray-900">{longitude && !isNaN(longitude)
+                  ? Number(longitude).toFixed(3)
+                  : "N/A"}</p>
+        </div>
+      </div>
+
+      {/* Farm Size */}
+      <div className="flex items-center border rounded-lg p-4 shadow-sm bg-gray-50 mb-4">
+        <Layers className="text-green-600 w-6 h-6 mr-4" />
+        <div>
+          <h2 className="text-sm text-gray-500">Farm Size</h2>
+          <p className="text-lg font-semibold text-gray-900">{farmSize} acres</p>
+        </div>
+      </div>
+
+      {/* Soil Type */}
+      <div className="flex items-center border rounded-lg p-4 shadow-sm bg-gray-50 mb-4">
+        <Droplet className="text-green-600 w-6 h-6 mr-4" />
+        <div>
+          <h2 className="text-sm text-gray-500">Soil Type</h2>
+          <p className="text-lg font-semibold text-gray-900">
+            {soilType.charAt(0).toUpperCase() + soilType.slice(1)}
+          </p>
+        </div>
+      </div>
+
+      {/* Agro-Climatic Zone */}
+      <div className="flex items-center border rounded-lg p-4 shadow-sm bg-gray-50">
+        <Layers className="text-green-600 w-6 h-6 mr-4" />
+        <div>
+          <h2 className="text-sm text-gray-500">Agro-Climatic Zone</h2>
+          <p className="text-lg font-semibold text-gray-900">{agroClimaticZone}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
   );
 }
