@@ -147,7 +147,7 @@ const SignUpForm = () => {
             htmlFor="PasswordConfirmation"
             className="text-sm font-medium text-white dark:text-white -mt-8 "
           >
-            Confirme Password
+            Confirm Password
           </p>
           <input
             type="password"
@@ -162,12 +162,12 @@ const SignUpForm = () => {
         <div className="col-span-6 mx-16">
           <p className="text-sm text-white dark:text-white  mt-4">
             By creating an account, you agree to our
-            <a href="#" className="text-red-700 underline dark:text-red-600">
+            <a href="/t&c" className="text-red-700 underline dark:text-red-600">
               {" "}
               terms and conditions{" "}
             </a>
             and
-            <a href="#" className="text-red-700 underline dark:text-red-500">
+            <a href="/privacy_policy" className="text-red-700 underline dark:text-red-500">
               {" "}
               privacy policy{" "}
             </a>

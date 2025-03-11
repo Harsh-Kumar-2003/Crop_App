@@ -1,5 +1,3 @@
-// user/login
-
 "use client";
 
 import { useState } from "react";
@@ -7,7 +5,6 @@ import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
 import { signIn } from "next-auth/react";
 import LoginWithGoogle from "@/components/LoginWithGoogle";
 import Image from "next/image";
-import Link from "next/link";
 import irrigation from "@/public/images/irrigation.jpg";
 
 export default function Login() {
@@ -65,28 +62,6 @@ export default function Login() {
       alert("Login successful! Redirecting...");
     }
   };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const { email, password } = formData;
-  //   // Proceed with form submission
-  //   try {
-  //     const result = await signIn("credentials", {
-  //       email,
-  //       password,
-  //       mode: "login",
-  //       // Specify mode for signup
-  //     });
-
-  //     if (result.error) {
-  //       alert(result.error); // Display error message
-  //     } else {
-  //       alert("Login successful! Redirecting...");
-  //     }
-  //   } catch (error) {
-  //     alert("Something went wrong. Please try again.");
-  //   }
-  // };
 
   return (
     <div

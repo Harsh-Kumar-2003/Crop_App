@@ -1,5 +1,7 @@
 "use client";
 
+import NavBar from "@/components/navbar.jsx";
+
 export default function Services() {
     const services = [
       {
@@ -25,16 +27,19 @@ export default function Services() {
     ];
   
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-green-200 to-yellow-100 p-6">
-        <h1 className="text-5xl font-extrabold text-green-800 mb-10 drop-shadow-lg">🚜 Our Agricultural Services 🌿</h1>
-        
-        <div className="w-full max-w-6xl grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div key={index} className="p-6 bg-white rounded-3xl shadow-2xl border-l-8 border-green-600 hover:scale-105 transition-transform duration-300">
-              <h2 className="text-2xl font-bold text-green-900">{service.title}</h2>
-              <p className="text-gray-700 mt-3">{service.description}</p>
-            </div>
-          ))}
+      <div>
+        <NavBar />
+        <div className="pt-24 min-h-screen flex flex-col items-center justify-center bg-gradient-to-r from-green-200 to-yellow-100 p-6">
+          <h1 className="text-5xl font-extrabold text-green-800 mb-10 drop-shadow-lg">🚜 Our Agricultural Services 🌿</h1>
+          
+          <div className="w-full max-w-6xl grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {services.map((service, index) => (
+              <div key={index} className="p-6 bg-white rounded-3xl shadow-2xl border-l-8 border-green-600 hover:scale-105 transition-transform duration-300">
+                <h2 className="text-2xl font-bold text-green-900">{service.title}</h2>
+                <p className="text-gray-700 mt-3">{service.description}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
