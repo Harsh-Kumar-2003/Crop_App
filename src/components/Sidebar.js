@@ -10,7 +10,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import LogoutButton from "./LogOutButton";
 
 const Sidebar = ({ user , userName}) => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(true);
   const [isSpecificScreenSize, setIsSpecificScreenSize] = useState(false);
   
     useEffect(() => {
@@ -32,9 +32,9 @@ const Sidebar = ({ user , userName}) => {
 
   return (
     <div>
-      {/* Hamburger Button */}
       <nav className="bg-gray-200 rounded shadow-md p-4 flex justify-between items-center">
         <div className="flex">
+          {/* Hamburger Button */}
           <button
             onClick={toggleNav}
             className="p-2 rounded-md bg-green-500 shadow inline-flex items-center gap-2 cursor-pointer z-30"
@@ -43,7 +43,7 @@ const Sidebar = ({ user , userName}) => {
           </button>
           <div className="pl-10 flex items-center">
             <img src="/fieldmaven1.png" alt="Logo" className="h-12 w-12 mr-2" />
-            <span className="text-xl font-bold text-green-700">FieldRaven</span>
+            <span className="text-xl font-bold text-green-700">FieldMaven</span>
           </div>
         </div>
         {!isSpecificScreenSize&&(<div className="bg-green-100 text-green-700 font-medium px-4 py-2 rounded-full border border-green-500 shadow-sm">
@@ -106,7 +106,7 @@ const Sidebar = ({ user , userName}) => {
           </div>
           <Divider />
           <div className="text-center">
-            <AppSidebar user={user} />
+            <AppSidebar user={user} toggleNav={toggleNav} />
           </div>
           <Divider />
           <div className="text-center">

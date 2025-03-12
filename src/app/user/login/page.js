@@ -24,44 +24,55 @@ export default function Login() {
     }));
   };
 
-  const handleResetPassword = async (e) => {
-    console.log("Resetting password...");
-    try {
-      // Send email to user with reset link
-      const response = await fetch(`/api/reset-password?email=${resetEmail}`, {
-        method: "POST",
-      });
-      if (response.ok) {
-        console.log("Password reset email sent!");
-      }
-      const data = await response.json();
-      console.log(data);
-      alert("Password reset email sent!");
-      setShowModal(false);
-    } catch (error) {
-      console.error("Error sending reset email:", error);
-    }
-    //e.preventDefault();
-  };
+  // const handleResetPassword = async (e) => {
+  //   console.log("Resetting password...");
+  //   try {
+  //     // Send email to user with reset link
+  //     const response = await fetch(`/api/reset-password?email=${resetEmail}`, {
+  //       method: "POST",
+  //     });
+  //     if (response.ok) {
+  //       console.log("Password reset email sent!");
+  //     }
+  //     const data = await response.json();
+  //     console.log(data);
+  //     alert("Password reset email sent!");
+  //     setShowModal(false);
+  //   } catch (error) {
+  //     console.error("Error sending reset email:", error);
+  //   }
+  //   //e.preventDefault();
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = formData;
     // Proceed with form submission
 
-    const result = await signIn("credentials", {
-      email,
-      password,
-      mode: "login",
-      // Specify mode for signup
-    });
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
 
-    if (result.error) {
-      alert(result.error); // Display error message
-    } else {
-      alert("Login successful! Redirecting...");
+    // Validate password length
+    if (!password || password.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return;
+    }
+
+    try {
+      const result = await signIn("credentials", {
+        email,
+        password,
+        mode: "login",
+      });
+    } catch (error) {
+      alert("An unexpected error occurred. Please try again.");
     }
   };
+
 
   return (
     <div
@@ -284,3 +295,4 @@ export default function Login() {
     </div>
   );
 }
+

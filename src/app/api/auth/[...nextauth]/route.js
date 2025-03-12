@@ -16,10 +16,6 @@ export const authOptions = {
     }),
     CredentialsProvider({
       name: "credentials",
-      //   credentials: {
-      //     email: { label: "Email", type: "text" },
-      //     password: { label: "Password", type: "password" },
-      //   },
       async authorize(credentials) {
         try {
           console.log("Authorization credentials:", credentials);
@@ -71,7 +67,7 @@ export const authOptions = {
           throw new Error("Invalid mode");
         } catch (error) {
           console.error("Error in authorize function:", error.message);
-          throw new Error(error.message); // Pass specific error message
+          throw new Error(error.message);
         }
       },
     }),

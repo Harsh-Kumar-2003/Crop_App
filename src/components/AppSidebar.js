@@ -1,83 +1,66 @@
+"use client";
+
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import React from "react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion"; // Import animation library
+import { useRouter } from "next/navigation";
 
-export default function AppSidebar({ user }) {
+export default function AppSidebar({ user, toggleNav }) {
   const path = usePathname();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const handleNavigation = (href) => {
+    if (path !== href) {
+      setLoading(true);
+      router.push(href); // Only navigate if it's a different page
+    } else {
+      toggleNav();
+    }
+  };
+
+  useEffect(() => {
+    setLoading(false);
+    toggleNav();
+  }, [path]);
 
   return (
-    <nav
-      className="inline-flex mx-auto flex-col text-center gap-2
-text-black"
+    <motion.nav
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.3 }}
+      className="inline-flex mx-auto flex-col text-center gap-2 text-black"
     >
-      <Link
-        href={`/user/${user}/profile`} // Use the dynamic uri in the href
-        className={`flex gap-4 p-2 ${
-          path === `/user/${user}/profile` ? "text-blue-600" : ""
-        }`} // Check if the current path matches
-      >
-        <span>Profile</span>
-      </Link>
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white/70">
+          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
+      )}
 
-      <Link
-        href={`/user/${user}/cropRecommendation`}
-        className={
-          "flex gap-4 p-2 " +
-          (path === `/user/${user}/cropRecommendation` ? "text-green-500" : "")
-        }
-      >
-        <span>Crop Recommendation</span>
-      </Link>
-
-      <Link
-        href={`/user/${user}/soilConditioning`}
-        className={
-          "flex gap-4 p-2 " +
-          (path === `/user/${user}/soilConditioning` ? "text-amber-700" : "")
-        }
-      >
-        <span>Soil Conditioning</span>
-      </Link>
-
-      <Link
-        href={`/user/${user}/diseasePrediction`}
-        className={
-          "flex gap-4 p-2 " +
-          (path === `/user/${user}/weatherUpdates` ? "text-sky-500" : "")
-        }
-      >
-        <span>Disease Prediction</span>
-      </Link>
-
-      <Link
-        href={`/user/${user}/weatherUpdates`}
-        className={
-          "flex gap-4 p-2 " +
-          (path === `/user/${user}/weatherUpdates` ? "text-sky-500" : "")
-        }
-      >
-        <span>Weather Updates</span>
-      </Link>
-
-      <Link
-        href={`/user/${user}/pestManagement`}
-        className={
-          "flex gap-4 p-2 " +
-          (path === `/user/${user}/pestManagement` ? "text-red-600" : "")
-        }
-      >
-        <span>Pest Management</span>
-      </Link>
-
-      <Link
-        href={`/user/${user}/notifications`}
-        className={
-          "flex gap-4 p-2 " +
-          (path === `/user/${user}/notifications` ? "text-yellow-500" : "")
-        }
-      >
-        <span>Notifications</span>
-      </Link>
-    </nav>
+      {[
+        { name: "Profile", path: "profile" },
+        { name: "Crop Recommendation", path: "cropRecommendation" },
+        { name: "Soil Conditioning", path: "soilConditioning" },
+        { name: "Disease Prediction", path: "diseasePrediction" },
+        { name: "Weather Updates", path: "weatherUpdates" },
+        { name: "Pest Management", path: "pestManagement" },
+        { name: "Notifications", path: "notifications" },
+      ].map((item) => (
+        <Link
+          key={item.path}
+          href={`/user/${user}/${item.path}`}
+          className={`flex gap-4 p-2 ${
+            path === `/user/${user}/${item.path}` ? "text-sky-500" : ""
+          }`}
+          onClick={(e) => {
+            e.preventDefault(); // Prevent default link behavior
+            handleNavigation(`/user/${user}/${item.path}`);
+          }}
+        >
+          <span>{item.name}</span>
+        </Link>
+      ))}
+    </motion.nav>
   );
 }

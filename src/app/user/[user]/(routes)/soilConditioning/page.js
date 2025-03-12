@@ -1,4 +1,4 @@
-export default function SoilConditioning({ params }) {
-  const { user } = params;
+export default async function SoilConditioning({ params }) {
+  const { user } = await params;
   return <div>Soil Conditioning: {user}</div>;
 }

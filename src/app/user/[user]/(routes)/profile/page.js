@@ -40,7 +40,7 @@ export default async function Profile({ params }) {
   console.log(profile);
   return (
       <div
-        className="relative bottom-8 "
+        className="relative bottom-8"
         style={{
           backgroundImage: `url(${bg.src})`,
           backgroundSize: "cover",
