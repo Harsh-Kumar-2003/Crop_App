@@ -113,7 +113,7 @@ export default async function WeatherUpdates({ params }) {
       </div>
 
       {/* Forecast */}
-      <div className="space-y-4 bg-white rounded-lg">
+      <div className="space-y-4 bg-gradient-to-br from-white rounded-lg">
         <h1 className="text-4xl font-bold pt-10 text-blue-700 pl-6">
           Forecast
         </h1>
