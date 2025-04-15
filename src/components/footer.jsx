@@ -39,7 +39,7 @@ export default function Footer() {
             <h5 className="text-lg font-bold mb-4">Contact Us</h5>
             <p className="text-sm mb-2">BCE,Bhagalpur, 2K21 , IN 813210</p>
             <p className="text-sm mb-2">Phone: SSLH </p>
-            <p className="text-sm">Email: info@fieldravenBCE.com</p>
+            <p className="text-sm">Email: info@fieldMavenBCE.com</p>
           </div>
         </div>
         <div className="mt-8 border-t border-gray-700 pt-4 text-center">
