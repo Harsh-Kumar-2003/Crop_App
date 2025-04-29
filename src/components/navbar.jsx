@@ -68,7 +68,7 @@ export default function NavBar(){
           {!isSpecificScreenSize &&(<button className="mx-11 px-6 py-2 bg-green-800 text-white rounded-xl hover:bg-indigo-600" onClick={handleClick}>
             {loading ? "Loading" : "Login"}
           </button>)}
-          
+
           <button
             className="md:hidden text-gray-500 focus:outline-none"
             onClick={() => setMenuOpen(!menuOpen)}
