@@ -15,10 +15,21 @@ import wind from "@/public/images/wind.png";
 
 export default function WeatherCard({ todayWeather, date }) {
   const getWeatherImage = () => {
-    if (todayWeather.maxTemperature >= 30) return sunny;
-    if (todayWeather.precipitationProbabilityMax >= 50) return rainy;
-    if (todayWeather.maxWindSpeed >= 7) return wind;
-    if (todayWeather.maxTemperature < 10) return thunder;
+    // if (todayWeather.maxTemperature >= 30) return sunny;
+    if (todayWeather.maxTemperature < 40 && todayWeather.maxWindSpeed > 10)
+      return wind;
+    if (
+      todayWeather.precipitationProbabilityMax >= 40 &&
+      todayWeather.maxWindGusts >= 25
+    )
+      return rainy;
+    // if (todayWeather.maxWindSpeed >= 7) return wind;
+    if (
+      todayWeather.maxTemperature < 20 &&
+      todayWeather.precipitationProbabilityMax >= 50
+    )
+      return thunder;
+
     return sunny; // Default image
   };
 

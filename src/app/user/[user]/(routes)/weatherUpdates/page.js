@@ -37,14 +37,23 @@ export default async function WeatherUpdates({ params }) {
     }
   );
   const weather = await response.json();
+  console.log(weather);
+
   const todayWeather = await weather.today;
   const forecast = await weather.forecast;
 
   const getWeatherImage = () => {
-    if (todayWeather.maxTemperature >= 30) return sunny;
+    // if (todayWeather.maxTemperature >= 30) return sunny;
+    if (todayWeather.maxTemperature < 40 && todayWeather.maxWindSpeed > 10)
+      return wind;
     if (todayWeather.precipitationProbabilityMax >= 50) return rainy;
-    if (todayWeather.maxWindSpeed >= 7) return wind;
-    if (todayWeather.maxTemperature < 10) return thunder;
+    // if (todayWeather.maxWindSpeed >= 7) return wind;
+    if (
+      todayWeather.maxTemperature < 20 &&
+      todayWeather.precipitationProbabilityMax >= 50
+    )
+      return thunder;
+
     return sunny; // Default image
   };
 
