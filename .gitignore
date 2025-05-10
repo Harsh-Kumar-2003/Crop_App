@@ -40,3 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 src/app/api/test/route.js
+/apple_disease_model
+/apple_train
