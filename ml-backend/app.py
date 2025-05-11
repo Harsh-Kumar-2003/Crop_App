@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from PIL import Image
 import io
+import os
 import numpy as np
 from tensorflow.keras.models import load_model  # For loading .keras model
 
@@ -15,48 +16,39 @@ IMAGE_SIZE = 256
 CROPS = {
     'apple': {
         'model_path': 'models/apple_disease_model.keras',
-        'classes': ['Apple Scab', 'Black Rot', 'Cedar Apple Rust', 'Healthy'],
-        'accuracy': 0.9443
+        'classes': ['Apple Scab', 'Black Rot', 'Cedar Apple Rust', 'Healthy']
     },
     'bell pepper': {
         'model_path': 'models/bell_pepper_disease_model.keras',
-        'classes': ['Bacterial Spot', 'Healthy'],
-        'accuracy': 0.9678
+        'classes': ['Bacterial Spot', 'Healthy']
     },
     'cherry': {
         'model_path': 'models/cherry_disease_model.keras',
-        'classes': ['Healthy', 'Powdery Mildew'],
-        'accuracy': 0.9389
+        'classes': ['Healthy', 'Powdery Mildew']
     },
     'corn': {
         'model_path': 'models/corn_disease_model.keras',
-        'classes': ['Cercospora Leaf Spot', 'Common Rust', 'Healthy', 'Northern Leaf Blight'],
-        'accuracy': 0.9771
+        'classes': ['Cercospora Leaf Spot', 'Common Rust', 'Healthy', 'Northern Leaf Blight']
     },
     'grape': {
         'model_path': 'models/grape_disease_model.keras',
-        'classes': ['Black Rot', 'Esca', 'Healthy', 'Leaf Blight'],
-        'accuracy': 0.9442
+        'classes': ['Black Rot', 'Esca', 'Healthy', 'Leaf Blight']
     },
     'peach': {
         'model_path': 'models/peach_disease_model.keras',
-        'classes': ['Bacterial Spot', 'Healthy'],
-        'accuracy': 0.9841
+        'classes': ['Bacterial Spot', 'Healthy']
     },
     'potato': {
         'model_path': 'models/potato_disease_model.keras',
-        'classes': ['Early Blight', 'Healthy', 'Late Blight'],
-        'accuracy': 0.9789
+        'classes': ['Early Blight', 'Healthy', 'Late Blight']
     },
     'strawberry': {
         'model_path': 'models/strawberry_disease_model.keras',
-        'classes': ['Healthy', 'Leaf Scorch'],
-        'accuracy': 0.9924
+        'classes': ['Healthy', 'Leaf Scorch']
     },
     'tomato': {
         'model_path': 'models/tomato_disease_model.keras',
-        'classes': ['Bacterial Spot', 'Early Blight', 'Healthy', 'Late Blight', 'Septoria Leaf Spot','Yellow Leaf Curl Virus'],
-        'accuracy': 0.9087
+        'classes': ['Bacterial Spot', 'Early Blight', 'Healthy', 'Late Blight', 'Septoria Leaf Spot','Yellow Leaf Curl Virus']
     },
 }
 
