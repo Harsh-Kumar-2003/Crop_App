@@ -6,6 +6,8 @@ import { signIn } from "next-auth/react";
 import LoginWithGoogle from "@/components/LoginWithGoogle";
 import Image from "next/image";
 import irrigation from "@/public/images/irrigation.jpg";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -13,6 +15,14 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const router = useRouter();
+
+  const { data: session } = useSession();
+  console.log("Session data:", session);
+  if (session) {
+    console.log("User is logged in:", session.user);
+    router.push("/user/");
+  }
   const [showModal, setShowModal] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
 
@@ -73,7 +83,6 @@ export default function Login() {
     }
   };
 
-
   return (
     <div
       className=""
@@ -86,13 +95,13 @@ export default function Login() {
     >
       <aside className="pl-3 bg-black bg-opacity-50 md:bg-transparent relative block h-16  lg:col-span-5 lg:h-full xl:col-span-6">
         <a href="/">
-        <Image
-          src="/fieldmaven1.png"
-          alt="A description of the image"
-          width={70}
-          height={70}
-          className="rounded-2xl "
-        ></Image>
+          <Image
+            src="/fieldmaven1.png"
+            alt="A description of the image"
+            width={70}
+            height={70}
+            className="rounded-2xl "
+          ></Image>
         </a>
       </aside>
       <div className="flex justify-center items-center">
