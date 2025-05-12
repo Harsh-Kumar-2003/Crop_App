@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { EyeIcon, EyeOffIcon } from "@heroicons/react/solid";
 import { signIn } from "next-auth/react";
 import LoginWithGoogle from "@/components/LoginWithGoogle";
@@ -19,10 +19,13 @@ export default function Login() {
 
   const { data: session } = useSession();
   console.log("Session data:", session);
-  if (session) {
-    console.log("User is logged in:", session.user);
-    router.push("/user/");
-  }
+
+  useEffect(() => {
+    if (session) {
+      router.replace("/user");
+    }
+  }, [session, router]);
+
   const [showModal, setShowModal] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
 

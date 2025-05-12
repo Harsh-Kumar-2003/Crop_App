@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import User from "@/models/User"; // Import the User model
+import mongoose from "mongoose";
 
 export default async function UserHome() {
   // Fetch the session using getServerSession
@@ -14,6 +15,7 @@ export default async function UserHome() {
   }
 
   // Fetch user by email to retrieve the UUID
+  await mongoose.connect(process.env.MONGODB_URI);
   const user = await User.findOne({ email: session.user.email });
 
   // If user is not found, redirect to login (just in case)

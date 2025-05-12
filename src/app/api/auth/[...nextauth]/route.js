@@ -72,8 +72,25 @@ export const authOptions = {
       },
     }),
   ],
+  // session: {
+  //   jwt: true,
+  // },
   session: {
-    jwt: true,
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days in seconds
+  },
+  // Customize the session cookie
+  cookies: {
+    sessionToken: {
+      name: "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        maxAge: 30 * 24 * 60 * 60,
+      },
+    },
   },
   callbacks: {
     async jwt({ token, user, account, profile }) {
