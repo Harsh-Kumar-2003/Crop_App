@@ -1,8 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
-import { redirect } from "next/dist/server/api-utils";
+import { useRouter } from "next/navigation";
+import { set } from "nprogress";
 
 export default function CropRecommendationForm({ user }) {
+  const router = useRouter();
+
+  const [result, setResult] = useState(false);
+  const [title, setTitle] = useState('🌱 Get Recommendations');
   const [formData, setFormData] = useState({
     nitrogen: "",
     phosphorus: "",
@@ -15,23 +20,37 @@ export default function CropRecommendationForm({ user }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:8000/predict_crop", {
+    setResult(false);
+    setTitle('🌱 Getting Recommendations...');
+    // Format formData values into numbers and wrap in a 2D array
+    const formattedData = {
+      data: [[
+        Number(formData.nitrogen),
+        Number(formData.phosphorus),
+        Number(formData.potassium),
+        Number(formData.temperature),
+        Number(formData.humidity),
+        Number(formData.ph),
+        Number(formData.rainfall)
+      ]]
+    };
+
+    const response = await fetch("http://localhost:5000/predict_crop", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(formattedData),
     });
 
     const data = await response.json();
-    console.log(data);
     if (response.ok) {
       localStorage.setItem("crop_result", JSON.stringify(data));
-      console.log(data);
-      redirect(`/user/${user}/cropRecommendation/result`);
+      setResult(data['result']);
     } else {
       alert("Error: " + data.message);
     }
+    setTitle('🌱 Get Recommendations');
   };
 
   const handleChange = (e) => {
@@ -88,8 +107,13 @@ export default function CropRecommendationForm({ user }) {
         type="submit"
         className="col-span-full mt-4 bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition"
       >
-        🌱 Get Recommendations
+        {title}
       </button>
+      {result && (
+        <div className="col-span-full mt-4 text-center text-green-700 font-bold">
+          <p>Recommendation: {result}</p>
+        </div>
+      )}
     </form>
   );
 }

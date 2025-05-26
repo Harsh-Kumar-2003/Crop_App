@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from PIL import Image
 import io
-import os
+import pickle
 import numpy as np
 from tensorflow.keras.models import load_model  # For loading .keras model
 
@@ -102,6 +102,31 @@ def predict():
 
     except Exception as e:
         return jsonify({'error': f'Error during prediction: {str(e)}'}), 500
+    
+
+recom_model= pickle.load(open('models/best_crop_recommendation_model.pkl','rb'))
+
+@app.route('/predict_crop', methods=['POST'])
+def predict_crop():
+    crop_dict = {
+        1: "Rice", 2: "Maize", 3: "Jute", 4: "Cotton", 5: "Coconut", 6: "Papaya", 7: "Orange",
+        8: "Apple", 9: "Muskmelon", 10: "Watermelon", 11: "Grapes", 12: "Mango", 13: "Banana",
+        14: "Pomegranate", 15: "Lentil", 16: "Blackgram", 17: "Mungbean", 18: "Mothbeans",
+        19: "Pigeonpeas", 20: "Kidneybeans", 21: "Chickpea", 22: "Coffee"
+    }
+    try:
+        data = request.get_json(force=True)
+        input_data = np.array(data.get('data'))
+        if input_data is None or input_data.shape != (1, 7):
+            return jsonify({'error': 'Invalid input shape. Expected shape (1, 7).'}), 400
+
+        prediction = recom_model.predict(input_data)
+        predicted_class_name = crop_dict.get(prediction[0], "Unknown Crop")
+
+        return jsonify({'result': predicted_class_name}), 200
+    except Exception as e:
+        return jsonify({'error': f'Error during prediction: {str(e)}'}), 500
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
