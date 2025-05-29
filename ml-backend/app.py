@@ -117,8 +117,9 @@ def predict_crop():
     try:
         data = request.get_json(force=True)
         input_data = np.array(data.get('data'))
-        if input_data is None or input_data.shape != (1, 7):
-            return jsonify({'error': 'Invalid input shape. Expected shape (1, 7).'}), 400
+        print(input_data)
+        # if input_data is None or input_data.shape != (1, 7):
+        #     return jsonify({'error': 'Invalid input shape. Expected shape (1, 7).'}), 400
 
         prediction = recom_model.predict(input_data)
         predicted_class_name = crop_dict.get(prediction[0], "Unknown Crop")
